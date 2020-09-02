@@ -11,7 +11,7 @@ if (process.env.MONGODB_URI) {
     });
 }
 else {
-    mongoose.connect('mongodb://localhost/outcomeTrackerDb', {
+    mongoose.connect('mongodb://localhost/esivoblivion', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         autoIndex: false
