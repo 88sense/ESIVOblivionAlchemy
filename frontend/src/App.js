@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ingredientIndex } from './util';
 import { effectIndex } from './util';
+import IngredientList from './components/IngredientList';
 
 // import './App.css';
 
@@ -23,10 +24,7 @@ class App extends Component {
           .then(effects => {
             console.log(effects)
           })
-
-
       })
-
       .catch(err => {
         console.log(err)
         this.setState({ error: err.message })
@@ -83,6 +81,7 @@ class App extends Component {
 
         <section>
           {/* Filtered Results */}
+          <IngredientList ingredientList={this.state.ingredients}/>
         </section>
 
         <footer>
