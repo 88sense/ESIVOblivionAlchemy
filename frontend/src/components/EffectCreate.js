@@ -41,7 +41,7 @@ class EffectCreate extends Component {
 
         return (
             <div>
-                <form className="m-3">
+                <form className="text-white m-2">
                     <div className="form-group">
                         <label htmlFor="effectName">Effect Name</label>
                         <input
@@ -52,10 +52,10 @@ class EffectCreate extends Component {
                             placeholder="New Effect Name"
                             onChange={this.handleChange}
                             value={this.state.newEffect.effectName}
-                        // title="Enter Company Name"
                         />
                         <div className="dropdown-divider"></div>
-                        <button type="submit" className="btn btn-primary">Create</button>
+                        <button type="submit" className="btn btn-success">Create</button>
+                        <button type="button" className="btn btn-danger ml-2" onClick={this.props.toggleEffectCreate}>Cancel</button>
                     </div>
 
 

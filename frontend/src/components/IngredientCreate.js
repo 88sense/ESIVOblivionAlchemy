@@ -56,7 +56,7 @@ class IngredientCreate extends Component {
 
         return (
             <div>
-                <form className="m-3">
+                <form className="text-white m-2">
                     <div className="form-group">
                         <label htmlFor="ingredientName">Ingredient Name</label>
                         <input
@@ -67,50 +67,59 @@ class IngredientCreate extends Component {
                             placeholder="New Ingredient Name"
                             onChange={this.handleChange}
                             value={this.state.newIngredient.ingredientName}
-                        // title="Enter Company Name"
                         />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="effect01">Effect 01</label>
-                        <select className="form-control" id="effect01">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="effect02">Effect 02</label>
-                        <select className="form-control" id="effect02">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="effect03">Effect 03</label>
-                        <select className="form-control" id="effect03">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="effect04">Effect 04</label>
-                        <select className="form-control" id="effect04">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
+                    <div className="row">
+
+                        <div className="col">
+                            <label htmlFor="effect01">Effect 01</label>
+                            <select className="form-control" id="effect01">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div className="col">
+                            <label htmlFor="effect03">Effect 03</label>
+                            <select className="form-control" id="effect03">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
                     </div>
 
+                    <div className="row">
+                        <div className="col">
+                            <label htmlFor="effect02">Effect 02</label>
+                            <select className="form-control" id="effect02">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+
+                        <div className="col">
+                            <label htmlFor="effect04">Effect 04</label>
+                            <select className="form-control" id="effect04">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="dropdown-divider"></div>
+                    <button type="submit" className="btn btn-success">Create</button>
+                    <button type="button" className="btn btn-danger ml-2" onClick={this.props.toggleIngredientCreate}>Cancel</button>
 
                 </form>
             </div>

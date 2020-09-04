@@ -20,27 +20,32 @@ class SearchFilters extends Component {
 
         return (
             <div>
-                <div className="bg-primary">
+                <div className="bg-success py-2">
 
-                    <div className="border border-warning d-flex flex-row justify-content-between">
-                        <div className="form-group m-3">
-                            <label htmlFor="textSearch">Search</label>
-                            <input type="search" className="form-control" id="textSearch" />
+                    <div className="d-flex flex-row justify-content-between">
+                        <div className="flex-grow-1 form-group row m-3">
+                            <label htmlFor="textSearch" class="col-form-label">Search</label>
+                            <div class="col-sm-6">
+                                <input type="search" className="form-control" id="textSearch" placeholder="Enter keywords" />
+
+                            </div>
                         </div>
 
                         <div className="m-3">
-                            {/* Disable buttons when create forms are showing */}
-                            <div className="btn-group m-2">
+                            <div className="btn-group ml-2">
+                                {/* Display disable buttons when create forms are showing */}
                                 <button type="button"
-                                    className={this.state.showEffectCreate ? "btn btn-secondary disabled" : "btn btn-success"}
+
+                                    className={this.state.showEffectCreate ? "btn btn-secondary disabled" : "btn btn-outline-dark"}
                                     onClick={this.toggleEffectCreate}
                                 >
                                     Create Effect
                                 </button>
                             </div>
-                            <div className="btn-group m-2">
+                            <div className="btn-group ml-2">
+                                {/* Display disable buttons when create forms are showing */}
                                 <button type="button"
-                                    className={this.state.showIngredientCreate ? "btn btn-secondary disabled" : "btn btn-success"}
+                                    className={this.state.showIngredientCreate ? "btn btn-secondary disabled" : "btn btn-outline-dark"}
                                     onClick={this.toggleIngredientCreate}
                                 >
                                     Create Ingredient
@@ -48,20 +53,27 @@ class SearchFilters extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="border border-warning d-flex flex-row justify-content-end align-items-start">
+
+                    {/* Remove padding when create forms are not showing */}
+                    <div className={this.state.showEffectCreate || this.state.showIngredientCreate ? "bg-dark m-3 p-2" : "bg-dark m-3"}>
                         {/* Create Effect form  */}
                         {this.state.showEffectCreate
-                            ? <EffectCreate addToEffects={this.addToEffects} />
+                            ? <EffectCreate
+                                addToEffects={this.addToEffects}
+                                toggleEffectCreate={this.toggleEffectCreate} />
                             : null
                         }
 
                         {/* Create Ingredient form  */}
                         {this.state.showIngredientCreate
-                            ? <IngredientCreate addToIngredients={this.addToIngredients} />
+                            ? <IngredientCreate
+                                addToIngredients={this.addToIngredients}
+                                toggleIngredientCreate={this.toggleIngredientCreate} />
                             : null
                         }
                     </div>
-                    <div>
+
+                    <div className="m-3">
                         <EffectSelectors />
                     </div>
                 </div>

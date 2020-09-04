@@ -5,10 +5,10 @@ class EffectSelectors extends Component {
     render() {
 
         return (
-            <div className="border border-warning">
-                <form className="d-flex flex-row justify-content-between  m-3">
-                    <div className="form-group">
-                        <label htmlFor="effectSelector01">Effect 01</label>
+            <div>
+                <form className="row">
+                    <div className="col">
+                        <label htmlFor="effectSelector01">Filter Effect 01</label>
                         <select className="form-control" id="effectSelector01">
                             <option>1</option>
                             <option>2</option>
@@ -17,8 +17,8 @@ class EffectSelectors extends Component {
                             <option>5</option>
                         </select>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="effectSelector02">Effect 02</label>
+                    <div className="col">
+                        <label htmlFor="effectSelector02">Filter Effect 02</label>
                         <select className="form-control" id="effectSelector02">
                             <option>1</option>
                             <option>2</option>
@@ -27,8 +27,8 @@ class EffectSelectors extends Component {
                             <option>5</option>
                         </select>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="effectSelector03">Effect 03</label>
+                    <div className="col">
+                        <label htmlFor="effectSelector03">Filter Effect 03</label>
                         <select className="form-control" id="effectSelector03">
                             <option>1</option>
                             <option>2</option>
@@ -37,8 +37,8 @@ class EffectSelectors extends Component {
                             <option>5</option>
                         </select>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="effectSelector04">Effect 04</label>
+                    <div className="col">
+                        <label htmlFor="effectSelector04">Filter Effect 04</label>
                         <select className="form-control" id="effectSelector04">
                             <option>1</option>
                             <option>2</option>
