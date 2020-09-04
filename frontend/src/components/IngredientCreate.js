@@ -46,6 +46,7 @@ class IngredientCreate extends Component {
                         count: ''
                     }
                 });
+                this.props.toggleIngredientCreate();
             })
             .catch((err) => {
                 this.setState({ error: err })
@@ -56,7 +57,7 @@ class IngredientCreate extends Component {
 
         return (
             <div>
-                <form className="text-white m-2">
+                <form onSubmit={this.submitIngredient} className="text-white m-2">
                     <div className="form-group">
                         <label htmlFor="ingredientName">Ingredient Name</label>
                         <input

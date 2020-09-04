@@ -21,11 +21,10 @@ class SearchFilters extends Component {
         return (
             <div>
                 <div className="bg-success py-2">
-
                     <div className="d-flex flex-row justify-content-between">
                         <div className="flex-grow-1 form-group row m-3">
-                            <label htmlFor="textSearch" class="col-form-label">Search</label>
-                            <div class="col-sm-6">
+                            <label htmlFor="textSearch" className="col-form-label">Search</label>
+                            <div className="col-sm-6">
                                 <input type="search" className="form-control" id="textSearch" placeholder="Enter keywords" />
 
                             </div>
@@ -59,7 +58,7 @@ class SearchFilters extends Component {
                         {/* Create Effect form  */}
                         {this.state.showEffectCreate
                             ? <EffectCreate
-                                addToEffects={this.addToEffects}
+                                addToEffects={this.props.addToEffects}
                                 toggleEffectCreate={this.toggleEffectCreate} />
                             : null
                         }
@@ -67,7 +66,7 @@ class SearchFilters extends Component {
                         {/* Create Ingredient form  */}
                         {this.state.showIngredientCreate
                             ? <IngredientCreate
-                                addToIngredients={this.addToIngredients}
+                                addToIngredients={this.props.addToIngredients}
                                 toggleIngredientCreate={this.toggleIngredientCreate} />
                             : null
                         }
@@ -77,11 +76,6 @@ class SearchFilters extends Component {
                         <EffectSelectors />
                     </div>
                 </div>
-
-
-
-
-
 
             </div >
         )

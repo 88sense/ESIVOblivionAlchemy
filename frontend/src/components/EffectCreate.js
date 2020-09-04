@@ -31,6 +31,7 @@ class EffectCreate extends Component {
                         effectName: '',
                     }
                 });
+                this.props.toggleEffectCreate();
             })
             .catch((err) => {
                 this.setState({ error: err })
@@ -41,7 +42,7 @@ class EffectCreate extends Component {
 
         return (
             <div>
-                <form className="text-white m-2">
+                <form onSubmit={this.submitEffect} className="text-white m-2">
                     <div className="form-group">
                         <label htmlFor="effectName">Effect Name</label>
                         <input

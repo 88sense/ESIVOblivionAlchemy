@@ -8,12 +8,12 @@ class Ingredient extends Component {
             <div className="col mb-4">
                 <div className="card h-100 bg-info">
                     <div className="card-header">
-                        <div class="card-title font-weight-bolder">
-                            Featured
+                        <div className="card-title font-weight-bolder">
+                            {this.props.ingredient.ingredientName}
                         </div>
                     </div>
 
-                    <div class="card card-body">
+                    <div className="card card-body">
                         <ul className="list-group list-group-flush">
                             <li className="list-group-item">Effect 1</li>
                             <li className="list-group-item">Dapibus ac facilisis in</li>

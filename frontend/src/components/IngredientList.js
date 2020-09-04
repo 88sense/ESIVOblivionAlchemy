@@ -5,14 +5,18 @@ class IngredientList extends Component {
 
     render() {
 
+        const ingredientList = this.props.ingredientList;
+        const ingredientComponents = ingredientList.map((ingredient, index) => {
+            return <Ingredient
+                key={ingredient._id}
+                index={index}
+                ingredient={ingredient}
+            />
+        })
+
         return (
             <div className="row row-cols-1 row-cols-md-3 m-3">
-                <Ingredient />
-                <Ingredient />
-                <Ingredient />
-                <Ingredient />
-                <Ingredient />
-                <Ingredient />
+                {ingredientComponents}
             </div>
         )
     }

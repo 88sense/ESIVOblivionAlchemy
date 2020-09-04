@@ -13,7 +13,7 @@ class App extends Component {
   state = {
     ingredients: [],
     effects: [],
-    
+
   }
 
   componentDidMount() {
@@ -23,12 +23,35 @@ class App extends Component {
   fetchData = () => {
     ingredientIndex()
       .then(ingredients => {
+        ingredients.sort((a, b) => {
+          if (a.ingredientName.toLowerCase() <
+            b.ingredientName.toLowerCase()
+          ) {
+            return -1;
+          } else {
+            return 1;
+          }
+        })
         console.log(ingredients)
         effectIndex()
           .then(effects => {
+            effects.sort((a, b) => {
+              if (a.effectName.toLowerCase() <
+                b.effectName.toLowerCase()
+              ) {
+                return -1;
+              } else {
+                return 1;
+              }
+            })
             console.log(effects)
+            this.setState({
+              ingredients: ingredients,
+              effects: effects,
+            })
           })
       })
+
       .catch(err => {
         console.log(err)
         this.setState({ error: err.message })
@@ -37,16 +60,12 @@ class App extends Component {
 
   addToIngredients = (newIngredient) => {
     this.setState({
-      ingredients: [
-        newIngredient, ...this.state.ingredients
-      ]
+      ingredients: [newIngredient, ...this.state.ingredients]
     });
   }
   addToEffects = (newEffect) => {
     this.setState({
-      effects: [
-        newEffect, ...this.state.effects
-      ]
+      effects: [newEffect, ...this.state.effects]
     });
   }
 
