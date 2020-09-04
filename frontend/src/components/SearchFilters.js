@@ -9,6 +9,13 @@ class SearchFilters extends Component {
         showIngredientCreate: false,
     }
 
+    toggleEffectCreate = () => {
+        this.setState(state => ({ showEffectCreate: !state.showEffectCreate }))
+    }
+    toggleIngredientCreate = () => {
+        this.setState(state => ({ showIngredientCreate: !state.showIngredientCreate }))
+    }
+
     render() {
 
         return (
@@ -22,13 +29,20 @@ class SearchFilters extends Component {
                         </div>
 
                         <div className="m-3">
+                            {/* Disable buttons when create forms are showing */}
                             <div className="btn-group m-2">
-                                <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button"
+                                    className={this.state.showEffectCreate ? "btn btn-secondary disabled" : "btn btn-success"}
+                                    onClick={this.toggleEffectCreate}
+                                >
                                     Create Effect
                                 </button>
                             </div>
                             <div className="btn-group m-2">
-                                <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button"
+                                    className={this.state.showIngredientCreate ? "btn btn-secondary disabled" : "btn btn-success"}
+                                    onClick={this.toggleIngredientCreate}
+                                >
                                     Create Ingredient
                                 </button>
                             </div>
@@ -36,10 +50,16 @@ class SearchFilters extends Component {
                     </div>
                     <div className="border border-warning d-flex flex-row justify-content-end align-items-start">
                         {/* Create Effect form  */}
-                        <EffectCreate addToEffects={this.addToEffects} />
+                        {this.state.showEffectCreate
+                            ? <EffectCreate addToEffects={this.addToEffects} />
+                            : null
+                        }
 
                         {/* Create Ingredient form  */}
-                        <IngredientCreate addToIngredients={this.addToIngredients} />
+                        {this.state.showIngredientCreate
+                            ? <IngredientCreate addToIngredients={this.addToIngredients} />
+                            : null
+                        }
                     </div>
                     <div>
                         <EffectSelectors />
