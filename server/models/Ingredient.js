@@ -12,6 +12,7 @@ const Ingredient = mongoose.Schema({
     effect02: String,
     effect03: String,
     effect04: String,
+    count: Number
 });
 
 Ingredient.plugin(uniqueValidator);
