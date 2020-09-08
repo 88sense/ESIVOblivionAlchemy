@@ -51,7 +51,7 @@ class EffectCreate extends Component {
     render() {
 
         return (
-            <div>
+            <div className="bg-dark m-3 p-2">
                 <form onSubmit={this.submitEffect} className="text-white m-2">
                     <div className="form-group">
                         <label htmlFor="effectName">Effect Name</label>
@@ -67,8 +67,8 @@ class EffectCreate extends Component {
                         />
                         {/* Database Error Message*/}
                         {this.state.dbError
-                        ? <div className="text-danger">{this.state.dbErrorMessage}</div>
-                        : null
+                            ? <div className="text-danger">{this.state.dbErrorMessage}</div>
+                            : null
                         }
                         <div className="dropdown-divider"></div>
                         <button type="submit" className="btn btn-success">Create</button>

@@ -99,8 +99,9 @@ class App extends Component {
           <div>
             {/* Filters */}
             <SearchFilters
-              addToIngredients={this.addToIngredients}
+              effects={this.state.effects}
               addToEffects={this.addToEffects}
+              addToIngredients={this.addToIngredients}
             />
           </div>
 

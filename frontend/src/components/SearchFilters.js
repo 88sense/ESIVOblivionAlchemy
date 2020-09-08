@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import IngredientCreate from './IngredientCreate';
 import EffectCreate from './EffectCreate';
-import EffectSelectors from './EffectSelectors'
+import EffectFilters from './EffectFilters'
 
 class SearchFilters extends Component {
     state = {
@@ -52,8 +52,7 @@ class SearchFilters extends Component {
                         </div>
                     </div>
 
-                    {/* Remove padding when create forms are not showing */}
-                    <div className={this.state.showEffectCreate || this.state.showIngredientCreate ? "bg-dark m-3 p-2" : "bg-dark m-3"}>
+                    <div>
                         {/* Create Effect form  */}
                         {this.state.showEffectCreate
                             ? <EffectCreate
@@ -65,6 +64,7 @@ class SearchFilters extends Component {
                         {/* Create Ingredient form  */}
                         {this.state.showIngredientCreate
                             ? <IngredientCreate
+                                effects={this.props.effects}
                                 addToIngredients={this.props.addToIngredients}
                                 toggleIngredientCreate={this.toggleIngredientCreate} />
                             : null
@@ -72,7 +72,9 @@ class SearchFilters extends Component {
                     </div>
 
                     <div className="m-3">
-                        <EffectSelectors />
+                        <EffectFilters
+                            effects={this.props.effects}
+                        />
                     </div>
                 </div>
 

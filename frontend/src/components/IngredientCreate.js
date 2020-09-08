@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { createIngredient } from '../util'
+import EffectSelectControl from './EffectSelectControl'
 
 class IngredientCreate extends Component {
     state = {
@@ -67,7 +68,7 @@ class IngredientCreate extends Component {
     render() {
 
         return (
-            <div>
+            <div className="bg-dark m-3 p-2">
                 <form onSubmit={this.submitIngredient} className="text-white m-2">
                     <div className="form-group">
                         <label htmlFor="ingredientName">Ingredient Name</label>
@@ -88,51 +89,33 @@ class IngredientCreate extends Component {
                         }
                     </div>
 
-                    <div className="row">
-                        <div className="col">
-                            <label htmlFor="effect01">Effect 01</label>
-                            <select className="form-control" id="effect01">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </div>
-                        <div className="col">
-                            <label htmlFor="effect03">Effect 03</label>
-                            <select className="form-control" id="effect03">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </div>
+
+
+
+                    <div className="row my-2">
+                        <EffectSelectControl
+                            effects={this.props.effects}
+                            label="Add Effect 01"
+                            selectId="addEffect01"
+                        />
+                        <EffectSelectControl
+                            effects={this.props.effects}
+                            label="Add Effect 02"
+                            selectId="addEffect02"
+                        />
                     </div>
 
-                    <div className="row">
-                        <div className="col">
-                            <label htmlFor="effect02">Effect 02</label>
-                            <select className="form-control" id="effect02">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </div>
-
-                        <div className="col">
-                            <label htmlFor="effect04">Effect 04</label>
-                            <select className="form-control" id="effect04">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </div>
+                    <div className="row my-2">
+                        <EffectSelectControl
+                            effects={this.props.effects}
+                            label="Add Effect 03"
+                            selectId="addEffect03"
+                        />
+                        <EffectSelectControl
+                            effects={this.props.effects}
+                            label="Add Effect 04"
+                            selectId="addEffect04"
+                        />
                     </div>
 
                     <div className="dropdown-divider"></div>
