@@ -17,9 +17,15 @@ class EffectSelectControl extends Component {
 
         return (
             <div className="col">
-                <label htmlFor="effectSelector01">{this.props.label}</label>
-                <select className="form-control" id={this.props.selectId}>
-                    <option value="default">Select an Effect</option>
+                <label htmlFor={this.props.selectId}>{this.props.label}</label>
+                <select
+                    className="form-control"
+                    id={this.props.selectId}
+                    name={this.props.selectId}
+                    onChange={this.props.handleChange}
+                    value={this.props.value}
+                >
+                    <option value="">Select an Effect</option>
                     {effectSelectOptionComponents}
                 </select>
             </div>

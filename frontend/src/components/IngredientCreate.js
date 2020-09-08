@@ -6,10 +6,10 @@ class IngredientCreate extends Component {
     state = {
         newIngredient: {
             ingredientName: '',
-            effect01: '',
-            effect02: '',
-            effect03: '',
-            effect04: '',
+            addEffect01: '',
+            addEffect02: '',
+            addEffect03: '',
+            addEffect04: '',
             count: ''
         },
         dbError: false,
@@ -25,14 +25,15 @@ class IngredientCreate extends Component {
         this.setState({ newIngredient: newIngredient })
     }
 
+
     submitIngredient = (event) => {
         event.preventDefault();
         const newIngredient = {
             ingredientName: this.state.newIngredient.ingredientName,
-            effect01: this.state.newIngredient.effect01 === '' ? null : this.state.newIngredient.effect01,
-            effect02: this.state.newIngredient.effect02 === '' ? null : this.state.newIngredient.effect02,
-            effect03: this.state.newIngredient.effect03 === '' ? null : this.state.newIngredient.effect03,
-            effect04: this.state.newIngredient.effect04 === '' ? null : this.state.newIngredient.effect04,
+            effect01: this.state.newIngredient.addEffect01 === '' ? null : this.state.newIngredient.addEffect01,
+            effect02: this.state.newIngredient.addEffect02 === '' ? null : this.state.newIngredient.addEffect02,
+            effect03: this.state.newIngredient.addEffect03 === '' ? null : this.state.newIngredient.addEffect03,
+            effect04: this.state.newIngredient.addEffect04 === '' ? null : this.state.newIngredient.addEffect04,
             count: this.state.newIngredient.count
         };
         createIngredient(newIngredient)
@@ -49,10 +50,10 @@ class IngredientCreate extends Component {
                     this.setState({
                         newIngredient: {
                             ingredientName: '',
-                            effect01: '',
-                            effect02: '',
-                            effect03: '',
-                            effect04: '',
+                            addEffect01: '',
+                            addEffect02: '',
+                            addEffect03: '',
+                            addEffect04: '',
                             count: ''
                         }
                     });
@@ -89,19 +90,20 @@ class IngredientCreate extends Component {
                         }
                     </div>
 
-
-
-
                     <div className="row my-2">
                         <EffectSelectControl
                             effects={this.props.effects}
                             label="Add Effect 01"
                             selectId="addEffect01"
+                            value={this.state.newIngredient.addEffect01}
+                            handleChange={this.handleChange}
                         />
                         <EffectSelectControl
                             effects={this.props.effects}
                             label="Add Effect 02"
                             selectId="addEffect02"
+                            value={this.state.newIngredient.addEffect02}
+                            handleChange={this.handleChange}
                         />
                     </div>
 
@@ -110,11 +112,16 @@ class IngredientCreate extends Component {
                             effects={this.props.effects}
                             label="Add Effect 03"
                             selectId="addEffect03"
+                            value={this.state.newIngredient.addEffect03}
+                            handleChange={this.handleChange}
                         />
                         <EffectSelectControl
                             effects={this.props.effects}
                             label="Add Effect 04"
                             selectId="addEffect04"
+                            value={this.state.newIngredient.addEffect04}
+                            handleChange={this.handleChange}
+
                         />
                     </div>
 

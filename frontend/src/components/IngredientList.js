@@ -11,6 +11,8 @@ class IngredientList extends Component {
                 key={ingredient._id}
                 index={index}
                 ingredient={ingredient}
+                effects={this.props.effects}
+                effectCodex={this.props.effectCodex}
             />
         })
 

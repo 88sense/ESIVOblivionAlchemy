@@ -7,14 +7,14 @@ class SearchFilters extends Component {
     state = {
         showEffectCreate: false,
         showIngredientCreate: false,
-    }
+    };
 
     toggleEffectCreate = () => {
         this.setState(state => ({ showEffectCreate: !state.showEffectCreate }))
-    }
+    };
     toggleIngredientCreate = () => {
         this.setState(state => ({ showIngredientCreate: !state.showIngredientCreate }))
-    }
+    };
 
     render() {
 
