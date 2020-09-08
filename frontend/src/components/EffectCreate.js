@@ -6,7 +6,9 @@ class EffectCreate extends Component {
         newEffect: {
             effectName: ''
         },
-        error: '',
+        dbError: false,
+        dbErrorMessage: '',
+        error: ''
     }
 
     handleChange = (event) => {
@@ -25,13 +27,21 @@ class EffectCreate extends Component {
         createEffect(newEffect)
             .then(newEffect => {
                 console.log(newEffect);
-                this.props.addToEffects(newEffect);
-                this.setState({
-                    newEffect: {
-                        effectName: '',
-                    }
-                });
-                this.props.toggleEffectCreate();
+                if (newEffect.errors) {
+                    console.log("errors detected")
+                    this.setState({
+                        dbError: true,
+                        dbErrorMessage: newEffect.errors.effectName.message
+                    });
+                } else {
+                    this.props.addToEffects(newEffect.effect);
+                    this.setState({
+                        newEffect: {
+                            effectName: '',
+                        }
+                    });
+                    this.props.toggleEffectCreate();
+                }
             })
             .catch((err) => {
                 this.setState({ error: err })
@@ -53,13 +63,17 @@ class EffectCreate extends Component {
                             placeholder="New Effect Name"
                             onChange={this.handleChange}
                             value={this.state.newEffect.effectName}
+                            required
                         />
+                        {/* Database Validation Error */}
+                        {this.state.dbError
+                        ? <div className="text-danger">{this.state.dbErrorMessage}</div>
+                        : null
+                        }
                         <div className="dropdown-divider"></div>
                         <button type="submit" className="btn btn-success">Create</button>
                         <button type="button" className="btn btn-danger ml-2" onClick={this.props.toggleEffectCreate}>Cancel</button>
                     </div>
-
-
                 </form>
             </div>
 

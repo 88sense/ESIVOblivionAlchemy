@@ -10,6 +10,6 @@ const Effect = mongoose.Schema({
     }
 })
 
-Effect.plugin(uniqueValidator);
+Effect.plugin(uniqueValidator, { message: 'Effect Name must be unique.' });
 
 module.exports = mongoose.model("Effect", Effect);

@@ -22,8 +22,9 @@ class App extends Component {
 
   fetchData = () => {
     ingredientIndex()
-      .then(ingredients => {
-        ingredients.sort((a, b) => {
+      .then(ingredientResults => {
+        console.log(ingredientResults)
+        ingredientResults.ingredients.sort((a, b) => {
           if (a.ingredientName.toLowerCase() <
             b.ingredientName.toLowerCase()
           ) {
@@ -32,10 +33,10 @@ class App extends Component {
             return 1;
           }
         })
-        console.log(ingredients)
         effectIndex()
-          .then(effects => {
-            effects.sort((a, b) => {
+          .then(effectResults => {
+            console.log(effectResults)
+            effectResults.effects.sort((a, b) => {
               if (a.effectName.toLowerCase() <
                 b.effectName.toLowerCase()
               ) {
@@ -44,10 +45,9 @@ class App extends Component {
                 return 1;
               }
             })
-            console.log(effects)
             this.setState({
-              ingredients: ingredients,
-              effects: effects,
+              ingredients: ingredientResults.ingredients,
+              effects: effectResults.effects,
             })
           })
       })
@@ -89,7 +89,7 @@ class App extends Component {
           <div className="bg-dark py-4">
             {/* Filtered Results */}
             <IngredientList ingredientList={this.state.ingredients} />
-            <EffectList effectList={this.state.effects} />
+            {/* <EffectList effectList={this.state.effects} /> */}
 
           </div>
         </section>

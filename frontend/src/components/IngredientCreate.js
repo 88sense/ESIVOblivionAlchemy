@@ -11,6 +11,8 @@ class IngredientCreate extends Component {
             effect04: '',
             count: ''
         },
+        dbError: false,
+        dbErrorMessage: '',
         error: '',
     }
 
@@ -26,27 +28,36 @@ class IngredientCreate extends Component {
         event.preventDefault();
         const newIngredient = {
             ingredientName: this.state.newIngredient.ingredientName,
-            effect01: this.state.newIngredient.effect01,
-            effect02: this.state.newIngredient.effect02,
-            effect03: this.state.newIngredient.effect03,
-            effect04: this.state.newIngredient.effect04,
+            effect01: this.state.newIngredient.effect01 === '' ? null : this.state.newIngredient.effect01,
+            effect02: this.state.newIngredient.effect02 === '' ? null : this.state.newIngredient.effect02,
+            effect03: this.state.newIngredient.effect03 === '' ? null : this.state.newIngredient.effect03,
+            effect04: this.state.newIngredient.effect04 === '' ? null : this.state.newIngredient.effect04,
             count: this.state.newIngredient.count
         };
         createIngredient(newIngredient)
             .then(newIngredient => {
                 console.log(newIngredient);
-                this.props.addToIngredients(newIngredient);
-                this.setState({
-                    newIngredient: {
-                        ingredientName: '',
-                        effect01: '',
-                        effect02: '',
-                        effect03: '',
-                        effect04: '',
-                        count: ''
-                    }
-                });
-                this.props.toggleIngredientCreate();
+                if (newIngredient.errors) {
+                    console.log("errors detected")
+                    this.setState({
+                        dbError: true,
+                        dbErrorMessage: newIngredient.errors.ingredientName.message
+                    });
+                } else {
+                    this.props.addToIngredients(newIngredient.ingredient);
+                    this.setState({
+                        newIngredient: {
+                            ingredientName: '',
+                            effect01: '',
+                            effect02: '',
+                            effect03: '',
+                            effect04: '',
+                            count: ''
+                        }
+                    });
+                    this.props.toggleIngredientCreate();
+                }
+
             })
             .catch((err) => {
                 this.setState({ error: err })
@@ -68,10 +79,16 @@ class IngredientCreate extends Component {
                             placeholder="New Ingredient Name"
                             onChange={this.handleChange}
                             value={this.state.newIngredient.ingredientName}
+                            required
                         />
+                        {/* Database Validation Error */}
+                        {this.state.dbError
+                            ? <div className="text-danger">{this.state.dbErrorMessage}</div>
+                            : null
+                        }
                     </div>
-                    <div className="row">
 
+                    <div className="row">
                         <div className="col">
                             <label htmlFor="effect01">Effect 01</label>
                             <select className="form-control" id="effect01">

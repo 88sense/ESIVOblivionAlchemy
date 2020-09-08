@@ -8,12 +8,15 @@ const Ingredient = mongoose.Schema({
         unique: true,
         index: true
     },
-    effect01: String,
-    effect02: String,
-    effect03: String,
-    effect04: String,
-    count: Number
+    effect01: mongoose.Schema.Types.ObjectId,
+    effect02: mongoose.Schema.Types.ObjectId,
+    effect03: mongoose.Schema.Types.ObjectId,
+    effect04: mongoose.Schema.Types.ObjectId,
+    count: {
+        type: Number,
+        default: "0"
+    }
 });
 
-Ingredient.plugin(uniqueValidator);
+Ingredient.plugin(uniqueValidator, { message: 'Ingredient Name must be unique.' });
 module.exports = mongoose.model("Ingredient", Ingredient);

@@ -13,7 +13,7 @@ const ingredientController = {
                 .then(ingredient => {
                     res.json({ ingredient: ingredient });
                 })
-                .catch(err => { res.send(err); })
+                .catch(err => { res.json(err); })
         },
         read: function (req, res) {
             Ingredient.findById({ _id: req.params.ingredientId })
@@ -27,8 +27,8 @@ const ingredientController = {
                 .then(ingredient => {
                     res.json({ ingredient: ingredient });
                 })
-                .catch(err => { res.send(err); })
-        },
+
+            },
         delete: function (req, res) {
             Ingredient.findOneAndRemove(req.params.ingredientId, { useFindAndModify: false })
                 .then(() => {
