@@ -22,9 +22,9 @@ class App extends Component {
 
   fetchData = () => {
     ingredientIndex()
-      .then(ingredientResults => {
-        console.log(ingredientResults)
-        ingredientResults.ingredients.sort((a, b) => {
+      .then(ingredientsResults => {
+        console.log(ingredientsResults)
+        ingredientsResults.ingredients.sort((a, b) => {
           if (a.ingredientName.toLowerCase() <
             b.ingredientName.toLowerCase()
           ) {
@@ -34,9 +34,9 @@ class App extends Component {
           }
         })
         effectIndex()
-          .then(effectResults => {
-            console.log(effectResults)
-            effectResults.effects.sort((a, b) => {
+          .then(effectsResults => {
+            console.log(effectsResults)
+            effectsResults.effects.sort((a, b) => {
               if (a.effectName.toLowerCase() <
                 b.effectName.toLowerCase()
               ) {
@@ -46,8 +46,8 @@ class App extends Component {
               }
             })
             this.setState({
-              ingredients: ingredientResults.ingredients,
-              effects: effectResults.effects,
+              ingredients: ingredientsResults.ingredients,
+              effects: effectsResults.effects,
             })
           })
       })
@@ -63,11 +63,29 @@ class App extends Component {
       ingredients: [newIngredient, ...this.state.ingredients]
     });
   }
+
   addToEffects = (newEffect) => {
     this.setState({
       effects: [newEffect, ...this.state.effects]
     });
   }
+
+  updateEffects = (updatedEffect) => {
+    this.setState({
+      effects: this.state.effects.map(effect => (
+        effect._id === updatedEffect._id ? { ...effect, ...updatedEffect } : effect
+      ))
+    });
+  }
+
+  deleteFromEffects = (effectIndex) => {
+    let effectList = this.state.effects;
+    effectList.splice(effectIndex, 1);
+    this.setState({
+      effects: effectList
+    });
+  }
+
 
   render() {
 
@@ -88,8 +106,12 @@ class App extends Component {
 
           <div className="bg-dark py-4">
             {/* Filtered Results */}
-            <IngredientList ingredientList={this.state.ingredients} />
-            {/* <EffectList effectList={this.state.effects} /> */}
+            {/* <IngredientList ingredientList={this.state.ingredients} /> */}
+            <EffectList
+              effectList={this.state.effects}
+              updateEffects={this.updateEffects}
+              deleteFromEffects={this.deleteFromEffects}
+            />
 
           </div>
         </section>

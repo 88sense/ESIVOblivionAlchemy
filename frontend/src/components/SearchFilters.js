@@ -34,7 +34,6 @@ class SearchFilters extends Component {
                             <div className="btn-group ml-2">
                                 {/* Display disable buttons when create forms are showing */}
                                 <button type="button"
-
                                     className={this.state.showEffectCreate ? "btn btn-secondary disabled" : "btn btn-outline-dark"}
                                     onClick={this.toggleEffectCreate}
                                 >

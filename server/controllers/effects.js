@@ -30,9 +30,9 @@ const effectController = {
             .catch(err => { res.send(err); })
     },
     delete: function (req, res) {
-        Effect.findOneAndRemove(req.params.effectId, { useFindAndModify: false })
-            .then(() => {
-                res.json({ message: 'Effect removed' })
+        Effect.findOneAndRemove({_id: req.params.effectId}, { useFindAndModify: false })
+            .then(effect => {
+                res.json({ effect: effect })
             })
             .catch(err => { res.send(err); })
     }

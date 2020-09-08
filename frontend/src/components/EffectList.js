@@ -11,11 +11,13 @@ class EffectList extends Component {
                 key={effect._id}
                 index={index}
                 effect={effect}
+                updateEffects={this.props.updateEffects}
+                deleteFromEffects={this.props.deleteFromEffects}
             />
         })
 
         return (
-            <div className="row row-cols-1 row-cols-md-4 m-3">
+            <div className="row row-cols-1 row-cols-md-3 m-3">
                 {effectComponents}
             </div>
         )

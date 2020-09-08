@@ -65,14 +65,14 @@ class EffectCreate extends Component {
                             value={this.state.newEffect.effectName}
                             required
                         />
-                        {/* Database Validation Error */}
+                        {/* Database Error Message*/}
                         {this.state.dbError
                         ? <div className="text-danger">{this.state.dbErrorMessage}</div>
                         : null
                         }
                         <div className="dropdown-divider"></div>
                         <button type="submit" className="btn btn-success">Create</button>
-                        <button type="button" className="btn btn-danger ml-2" onClick={this.props.toggleEffectCreate}>Cancel</button>
+                        <button type="button" className="btn btn-outline-light ml-2" onClick={this.props.toggleEffectCreate}>Cancel</button>
                     </div>
                 </form>
             </div>

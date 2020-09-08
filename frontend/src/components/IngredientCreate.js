@@ -81,7 +81,7 @@ class IngredientCreate extends Component {
                             value={this.state.newIngredient.ingredientName}
                             required
                         />
-                        {/* Database Validation Error */}
+                        {/* Database Error Message */}
                         {this.state.dbError
                             ? <div className="text-danger">{this.state.dbErrorMessage}</div>
                             : null
@@ -137,7 +137,7 @@ class IngredientCreate extends Component {
 
                     <div className="dropdown-divider"></div>
                     <button type="submit" className="btn btn-success">Create</button>
-                    <button type="button" className="btn btn-danger ml-2" onClick={this.props.toggleIngredientCreate}>Cancel</button>
+                    <button type="button" className="btn btn-outline-light ml-2" onClick={this.props.toggleIngredientCreate}>Cancel</button>
 
                 </form>
             </div>
