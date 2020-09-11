@@ -11,6 +11,7 @@ class EffectList extends Component {
                 key={effect._id}
                 index={index}
                 effect={effect}
+                effectCodex={this.props.effectCodex}
                 updateEffects={this.props.updateEffects}
                 deleteFromEffects={this.props.deleteFromEffects}
             />

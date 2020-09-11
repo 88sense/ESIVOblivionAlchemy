@@ -16,7 +16,7 @@ class App extends Component {
     effectCodex: {
       '00000000': {
         name: '',
-        relatedIngredients: []
+        relatedIngredients: {}
       }
     }
   };
@@ -40,7 +40,7 @@ class App extends Component {
           }
         })
         effectsResults.effects.forEach(effect => {
-          effectCodex[effect._id] = { name: effect.effectName, relatedIngredients: [] }
+          effectCodex[effect._id] = { name: effect.effectName, relatedIngredients: {} }
         })
         ingredientIndex()
           .then(ingredientsResults => {
@@ -54,9 +54,24 @@ class App extends Component {
                 return 1;
               }
             })
-            // ingredientsResults.ingredients.forEach(ingredient => {
-
-            // })
+            ingredientsResults.ingredients.forEach(ingredient => {
+              if (effectCodex[ingredient.effect01]) {
+                effectCodex[ingredient.effect01].relatedIngredients[ingredient.ingredientName] =
+                  (effectCodex[ingredient.effect01].relatedIngredients[ingredient.ingredientName] + 1) || 1;
+              }
+              if (effectCodex[ingredient.effect02]) {
+                effectCodex[ingredient.effect02].relatedIngredients[ingredient.ingredientName] =
+                  (effectCodex[ingredient.effect02].relatedIngredients[ingredient.ingredientName] + 1) || 1;
+              }
+              if (effectCodex[ingredient.effect03]) {
+                effectCodex[ingredient.effect03].relatedIngredients[ingredient.ingredientName] =
+                  (effectCodex[ingredient.effect03].relatedIngredients[ingredient.ingredientName] + 1) || 1;
+              }
+              if (effectCodex[ingredient.effect04]) {
+                effectCodex[ingredient.effect04].relatedIngredients[ingredient.ingredientName] =
+                  (effectCodex[ingredient.effect04].relatedIngredients[ingredient.ingredientName] + 1) || 1;
+              }
+            })
             this.setState({
               ingredients: ingredientsResults.ingredients,
               effects: effectsResults.effects,
@@ -143,6 +158,7 @@ class App extends Component {
             />
             <EffectList
               effects={this.state.effects}
+              effectCodex={this.state.effectCodex}
               updateEffects={this.updateEffects}
               deleteFromEffects={this.deleteFromEffects}
             />

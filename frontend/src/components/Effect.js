@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EffectEdit from './EffectEdit';
+import EffectRelatedIngredientList from './EffectRelatedIngredientList'
 
 class Effect extends Component {
     state = {
@@ -11,6 +12,11 @@ class Effect extends Component {
     }
 
     render() {
+  
+        const ingredientTotalsArray = Object.values(this.props.effectCodex[this.props.effect._id].relatedIngredients)
+        const reducer = (accumulator, currentValue) => accumulator + currentValue;
+        const ingredientTotal = ingredientTotalsArray.reduce(reducer);
+
 
         return (
             <div className="col mb-4">
@@ -18,7 +24,7 @@ class Effect extends Component {
                     <div className="card-header d-flex justify-content-between align-items-center">
                         <div className="card-title font-weight-bolder">
                             {this.props.effect.effectName}
-                            <span className="badge badge-primary ml-3">14</span>
+                            <span className="badge badge-primary ml-3">{ingredientTotal}</span>
                         </div>
                         <div>
 
@@ -59,7 +65,6 @@ class Effect extends Component {
                                 </div>
                             }
 
-
                         </div>
 
                     </div>
@@ -80,15 +85,11 @@ class Effect extends Component {
                     }
 
                     <div className="collapse" id={"relatedIngredientsList" + this.props.index}>
-                        <div className="card card-body">
-                            <ul className="list-group list-group-flush">
-                                <li className="list-group-item">Cras justo odio</li>
-                                <li className="list-group-item">Dapibus ac facilisis in</li>
-                                <li className="list-group-item">Morbi leo risus</li>
-                                <li className="list-group-item">Porta ac consectetur ac</li>
-                                <li className="list-group-item">Vestibulum at eros</li>
-                            </ul>
-                        </div>
+                   < EffectRelatedIngredientList
+                   effectCodex={this.props.effectCodex}
+                   effect={this.props.effect}
+
+                   />
                     </div>
                 </div>
             </div>
