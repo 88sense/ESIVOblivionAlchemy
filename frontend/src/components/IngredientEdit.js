@@ -39,6 +39,7 @@ class IngredientEdit extends Component {
             effect04: this.state.modifyIngredient.updateEffect04 === '' ? null : this.state.modifyIngredient.updateEffect04,
             count: this.state.modifyIngredient.count
         };
+        console.log(modifyIngredient)
         updateIngredient(this.props.ingredient._id, modifyIngredient)
             .then(updatedIngredient => {
                 console.log(updatedIngredient);

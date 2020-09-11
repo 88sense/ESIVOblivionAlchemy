@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { updateIngredient } from '../util'
 import IngredientEdit from './IngredientEdit';
 
 class Ingredient extends Component {
@@ -9,6 +10,33 @@ class Ingredient extends Component {
     toggleIngredientEdit = () => {
         this.setState(state => ({ showIngredientEdit: !state.showIngredientEdit }))
     }
+
+    submitIngredient = (modifyIngredient) => {
+        updateIngredient(this.props.ingredient._id, modifyIngredient)
+        .then(updatedIngredient => {
+            console.log(updatedIngredient)
+            if (updatedIngredient.errors) {
+                console.log("errors detected")
+            } else {
+                this.props.updateIngredients(updatedIngredient.ingredient);
+            }
+        })
+    }
+
+    increaseCount = () => {
+        if (this.props.ingredient.count > 0) {
+            let addCount = { "count": this.props.ingredient.count + 1 }
+            this.submitIngredient(addCount)
+        }
+    }
+
+    decreaseCount = () => {
+        if (this.props.ingredient.count > 0) {
+            let subtractCount = { "count": this.props.ingredient.count - 1 }
+            this.submitIngredient(subtractCount)
+        }
+    }
+
 
     render() {
         let effectCodex = this.props.effectCodex;
@@ -46,8 +74,7 @@ class Ingredient extends Component {
                         {this.state.showIngredientEdit
                             ?
                             <div>
-                                <button type="button"
-                                    className="btn btn-secondary btn-sm mr-1"
+                                <button type="button" className="btn btn-secondary btn-sm mr-1"
                                     onClick={this.toggleIngredientEdit}
                                 >
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-x-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +86,26 @@ class Ingredient extends Component {
                             </div>
                             :
                             <div>
-                                <button className="btn btn-secondary btn-sm mr-1" type="button"
+                                {/* Increase Ingredient Count */}
+                                <button type="button" className="btn btn-success btn-sm mr-1"
+                                    onClick={this.increaseCount}
+                                >
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-plus-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fillRule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                                    </svg>
+                                </button>
+
+                                {/* Decrease Ingredient Count */}
+                                <button type="button" className="btn btn-danger btn-sm mr-1" name="decrease"
+                                    onClick={this.decreaseCount}
+                                >
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-dash-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fillRule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z" />
+                                    </svg>
+                                </button>
+
+                                {/* Open Ingredient Edit Form */}
+                                <button type="button" className="btn btn-primary btn-sm mr-1"
                                     onClick={this.toggleIngredientEdit}
                                 >
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-pencil-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
