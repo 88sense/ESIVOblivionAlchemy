@@ -10,7 +10,7 @@ class IngredientCreate extends Component {
             addEffect02: '',
             addEffect03: '',
             addEffect04: '',
-            count: ''
+            count: 1
         },
         dbError: false,
         dbErrorMessage: '',
@@ -54,7 +54,7 @@ class IngredientCreate extends Component {
                             addEffect02: '',
                             addEffect03: '',
                             addEffect04: '',
-                            count: ''
+                            count: 1
                         }
                     });
                     this.props.toggleIngredientCreate();
@@ -71,23 +71,37 @@ class IngredientCreate extends Component {
         return (
             <div className="bg-dark m-3 p-2">
                 <form onSubmit={this.submitIngredient} className="text-white m-2">
-                    <div className="form-group">
-                        <label htmlFor="ingredientName">Ingredient Name</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="ingredientName"
-                            name="ingredientName"
-                            placeholder="New Ingredient Name"
-                            onChange={this.handleChange}
-                            value={this.state.newIngredient.ingredientName}
-                            required
-                        />
-                        {/* Database Error Message */}
-                        {this.state.dbError
-                            ? <div className="text-danger">{this.state.dbErrorMessage}</div>
-                            : null
-                        }
+
+                    <div className="d-flex flex-row justify-content-between my-2">
+                        <div className="flex-grow-1 mr-4">
+                            <label htmlFor="ingredientName">Ingredient Name</label>
+                            <input type="text"
+                                className="form-control"
+                                id="ingredientName"
+                                name="ingredientName"
+                                placeholder="New Ingredient Name"
+                                onChange={this.handleChange}
+                                value={this.state.newIngredient.ingredientName}
+                                required
+                            />
+                            {/* Database Error Message */}
+                            {this.state.dbError
+                                ? <div className="text-danger">{this.state.dbErrorMessage}</div>
+                                : null
+                            }
+                        </div>
+                        <div>
+                            <label htmlFor="count">Count</label>
+                            <input type="number"
+                                className="form-control"
+                                id="count"
+                                name="count"
+                                min="0" max="100"
+                                onChange={this.handleChange}
+                                value={this.state.newIngredient.count}
+                                required
+                            />
+                        </div>
                     </div>
 
                     <div className="row my-2">

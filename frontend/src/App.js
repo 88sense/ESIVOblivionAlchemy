@@ -65,7 +65,6 @@ class App extends Component {
             })
           })
       })
-
       .catch(err => {
         console.log(err)
         this.setState({ error: err.message })
@@ -79,7 +78,6 @@ class App extends Component {
   };
 
   updateIngredients = (updatedIngredient) => {
-    console.log(updatedIngredient)
     this.setState({
       ingredients: this.state.ingredients.map(ingredient => (
         ingredient._id === updatedIngredient._id ? { ...ingredient, ...updatedIngredient } : ingredient
