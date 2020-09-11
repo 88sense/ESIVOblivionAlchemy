@@ -5,8 +5,8 @@ class EffectList extends Component {
 
     render() {
 
-        const effectList = this.props.effectList;
-        const effectComponents = effectList.map((effect, index) => {
+        const effects = this.props.effects;
+        const effectComponents = effects.map((effect, index) => {
             return <Effect
                 key={effect._id}
                 index={index}

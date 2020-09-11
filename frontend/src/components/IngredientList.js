@@ -5,14 +5,17 @@ class IngredientList extends Component {
 
     render() {
 
-        const ingredientList = this.props.ingredientList;
-        const ingredientComponents = ingredientList.map((ingredient, index) => {
+        const ingredients = this.props.ingredients;
+        const ingredientComponents = ingredients.map((ingredient, index) => {
             return <Ingredient
                 key={ingredient._id}
                 index={index}
                 ingredient={ingredient}
                 effects={this.props.effects}
                 effectCodex={this.props.effectCodex}
+                updateIngredients={this.props.updateIngredients}
+                deleteFromIngredients={this.props.deleteFromIngredients}
+
             />
         })
 

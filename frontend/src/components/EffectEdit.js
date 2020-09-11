@@ -35,7 +35,6 @@ class EffectEdit extends Component {
         const modifyEffect = {
             effectName: this.state.modifyEffect.effectName,
         };
-        console.log(modifyEffect)
         updateEffect(this.props.effect._id, modifyEffect)
             .then(updatedEffect => {
                 console.log(updatedEffect);
@@ -84,6 +83,7 @@ class EffectEdit extends Component {
             })
     }
 
+
     render() {
 
         return (
@@ -93,7 +93,7 @@ class EffectEdit extends Component {
                         ? <div className="text-danger">{this.state.deletedEffect.effectName} has been deleted</div>
                         :
                         <div className="form-group">
-                            <label htmlFor="effectName">Effect Name</label>
+                            <label htmlFor={"editEffectName" + this.props.index}>Effect Name</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -114,9 +114,7 @@ class EffectEdit extends Component {
                             <button type="submit" className="btn btn-primary">Update</button>
                             <button type="button" className="btn btn-danger ml-2" onClick={this.purgeEffect}>Delete</button>
                         </div>
-
                     }
-
 
                 </form>
             </div>

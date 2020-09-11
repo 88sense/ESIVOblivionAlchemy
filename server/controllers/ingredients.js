@@ -30,7 +30,7 @@ const ingredientController = {
 
     },
     delete: function (req, res) {
-        Ingredient.findOneAndRemove(req.params.ingredientId, { useFindAndModify: false })
+        Ingredient.findOneAndRemove({ _id: req.params.ingredientId }, { useFindAndModify: false })
             .then(ingredient => {
                 res.json({ ingredient: ingredient })
             })

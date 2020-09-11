@@ -63,6 +63,7 @@ class Effect extends Component {
                         </div>
 
                     </div>
+                    
                     {this.state.showEffectEdit
                         ?
                         <div className="card card-body">
@@ -77,7 +78,6 @@ class Effect extends Component {
                         : null
 
                     }
-
 
                     <div className="collapse" id={"relatedIngredientsList" + this.props.index}>
                         <div className="card card-body">

@@ -79,6 +79,7 @@ class App extends Component {
   };
 
   updateIngredients = (updatedIngredient) => {
+    console.log(updatedIngredient)
     this.setState({
       ingredients: this.state.ingredients.map(ingredient => (
         ingredient._id === updatedIngredient._id ? { ...ingredient, ...updatedIngredient } : ingredient
@@ -87,9 +88,10 @@ class App extends Component {
   };
 
   deleteFromIngredients = (indexOfIngredient) => {
-    // let effectList = this.state.effects;
-    // effectList.splice(indexOfIngredient, 1);
-    this.setState(state => ({ ingredients: this.state.ingredients.splice(indexOfIngredient, 1) }));
+    let ingredients = this.state.ingredients;
+    ingredients.splice(indexOfIngredient, 1);
+    this.setState({ ingredients: ingredients })
+    // this.setState(state => ({ ingredients: this.state.ingredients.splice(indexOfIngredient, 1) }));
   };
 
   addToEffects = (newEffect) => {
@@ -107,11 +109,9 @@ class App extends Component {
   };
 
   deleteFromEffects = (indexOfEffect) => {
-    let effectList = this.state.effects;
-    effectList.splice(indexOfEffect, 1);
-    this.setState({
-      effects: effectList
-    });
+    let effects = this.state.effects;
+    effects.splice(indexOfEffect, 1);
+    this.setState({ effects: effects });
   };
 
 
@@ -136,7 +136,7 @@ class App extends Component {
           <div className="bg-dark py-4">
             {/* Filtered Results */}
             <IngredientList
-              ingredientList={this.state.ingredients}
+              ingredients={this.state.ingredients}
               effects={this.state.effects}
               effectCodex={this.state.effectCodex}
               updateIngredients={this.updateIngredients}
@@ -144,7 +144,7 @@ class App extends Component {
 
             />
             <EffectList
-              effectList={this.state.effects}
+              effects={this.state.effects}
               updateEffects={this.updateEffects}
               deleteFromEffects={this.deleteFromEffects}
             />
