@@ -12,10 +12,17 @@ class Effect extends Component {
     }
 
     render() {
-  
-        const ingredientTotalsArray = Object.values(this.props.effectCodex[this.props.effect._id].relatedIngredients)
+        
+        // Calculate sum of Ingredients related to Effect from values in relatedIngredients object
+        let ingredientTotal = 0;
+        let ingredientTotalsArray = [];
         const reducer = (accumulator, currentValue) => accumulator + currentValue;
-        const ingredientTotal = ingredientTotalsArray.reduce(reducer);
+        if (this.props.effectCodex[this.props.effect._id]) {
+            ingredientTotalsArray = Object.values(this.props.effectCodex[this.props.effect._id].relatedIngredients)
+        }
+        if (ingredientTotalsArray.length) {
+            ingredientTotal = ingredientTotalsArray.reduce(reducer);
+        }
 
         return (
             <div className="col my-4">
@@ -68,7 +75,7 @@ class Effect extends Component {
                         </div>
 
                     </div>
-                    
+
                     {this.state.showEffectEdit
                         ?
                         <div className="card card-body p-0 bg-dark">
@@ -85,11 +92,11 @@ class Effect extends Component {
                     }
 
                     <div className="collapse" id={"relatedIngredientsList" + this.props.index}>
-                   < EffectRelatedIngredientList
-                   effectCodex={this.props.effectCodex}
-                   effect={this.props.effect}
+                        < EffectRelatedIngredientList
+                            effectCodex={this.props.effectCodex}
+                            effect={this.props.effect}
 
-                   />
+                        />
                     </div>
                 </div>
             </div>

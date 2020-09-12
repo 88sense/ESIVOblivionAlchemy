@@ -50,7 +50,6 @@ class IngredientEdit extends Component {
             effect03: (!this.state.modifyIngredient.updateEffect03) ? null : this.state.modifyIngredient.updateEffect03,
             effect04: (!this.state.modifyIngredient.updateEffect04) ? null : this.state.modifyIngredient.updateEffect04,
         };
-        console.log(modifyIngredient)
         updateIngredient(this.props.ingredient._id, modifyIngredient)
             .then(updatedIngredient => {
                 console.log(updatedIngredient);
