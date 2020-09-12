@@ -21,8 +21,6 @@ class IngredientEdit extends Component {
     }
 
     componentDidMount() {
-
-        if (!this.props.ingredient.effect01) {console.log("effect 1 is null")}
         this.setState({
             modifyIngredient: {
                 ingredientName: this.props.ingredient.ingredientName,
@@ -30,9 +28,9 @@ class IngredientEdit extends Component {
                 updateEffect02: (!this.props.ingredient.effect02 ? '' : this.props.ingredient.effect02),
                 updateEffect03: (!this.props.ingredient.effect03 ? '' : this.props.ingredient.effect03),
                 updateEffect04: (!this.props.ingredient.effect04 ? '' : this.props.ingredient.effect04)
-                // count: ''
             }
-        });      };
+        });
+    };
 
     handleChange = (event) => {
         const inputName = event.target.name
@@ -51,7 +49,6 @@ class IngredientEdit extends Component {
             effect02: (!this.state.modifyIngredient.updateEffect02) ? null : this.state.modifyIngredient.updateEffect02,
             effect03: (!this.state.modifyIngredient.updateEffect03) ? null : this.state.modifyIngredient.updateEffect03,
             effect04: (!this.state.modifyIngredient.updateEffect04) ? null : this.state.modifyIngredient.updateEffect04,
-            // count: this.state.modifyIngredient.count
         };
         console.log(modifyIngredient)
         updateIngredient(this.props.ingredient._id, modifyIngredient)
@@ -65,15 +62,6 @@ class IngredientEdit extends Component {
                     });
                 } else {
                     this.props.updateIngredients(updatedIngredient.ingredient);
-                    // this.setState({
-                    //     modifyIngredient: {
-                    //         ingredientName: '',
-                    //         updateEffect01: '',
-                    //         updateEffect02: '',
-                    //         updateEffect03: '',
-                    //         updateEffect04: '',
-                    //     }
-                    // });
                     this.props.toggleIngredientEdit();
                 }
 
@@ -111,8 +99,8 @@ class IngredientEdit extends Component {
     render() {
 
         return (
-            <div className="bg-dark p-2">
-                <form onSubmit={this.submitIngredient} className="text-white m-2">
+            <div className="bg-dark text-white p-2">
+                <form onSubmit={this.submitIngredient} className="m-2">
                     {this.state.ingredientDeleted
                         ? <div className="text-danger">{this.state.deletedIngredient.ingredientName} has been deleted</div>
                         :

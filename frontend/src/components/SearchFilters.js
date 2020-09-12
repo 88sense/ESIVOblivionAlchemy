@@ -19,13 +19,12 @@ class SearchFilters extends Component {
     render() {
 
         return (
-            <div>
-                <div className="bg-success py-2">
-                    <div className="d-flex flex-row justify-content-between">
-                        <div className="flex-grow-1 form-group row m-3">
-                            <label htmlFor="textSearch" className="col-form-label">Search</label>
-                            <div className="col-sm-6">
-                                <input type="search" className="form-control" id="textSearch" placeholder="Enter keywords" />
+                <div>
+                    <div className="d-flex flex-row justify-content-between pb-1">
+                        <div className="flex-grow-1 form-group m-3">
+                            <label htmlFor="textSearch" className="col-form-label" hidden>Search</label>
+                            <div className="col-sm-8">
+                                <input type="search" className="form-control border border-dark" id="textSearch" placeholder="Enter Search..." />
 
                             </div>
                         </div>
@@ -77,8 +76,6 @@ class SearchFilters extends Component {
                         />
                     </div>
                 </div>
-
-            </div >
         )
     }
 

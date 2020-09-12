@@ -1,3 +1,4 @@
+import './App.css';
 import React, { Component } from 'react';
 import { ingredientIndex } from './util';
 import { effectIndex } from './util';
@@ -6,7 +7,7 @@ import SearchFilters from './components/SearchFilters';
 import IngredientList from './components/IngredientList';
 import EffectList from './components/EffectList';
 
-// import './App.css';
+
 
 class App extends Component {
 
@@ -137,7 +138,7 @@ class App extends Component {
         </header>
 
         <section>
-          <div>
+          <div className="bg-light pt-4 pb-2">
             {/* Filters */}
             <SearchFilters
               effects={this.state.effects}
@@ -146,7 +147,7 @@ class App extends Component {
             />
           </div>
 
-          <div className="bg-dark py-4">
+          <div className="overflow-auto py-4" id="resultList">
             {/* Filtered Results */}
             <IngredientList
               ingredients={this.state.ingredients}

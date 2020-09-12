@@ -19,7 +19,7 @@ class EffectSelectControl extends Component {
             <div className="col">
                 <label htmlFor={this.props.selectId}>{this.props.label}</label>
                 <select
-                    className="form-control"
+                    className="form-control bg-dark text-light"
                     id={this.props.selectId}
                     name={this.props.selectId}
                     onChange={this.props.handleChange}

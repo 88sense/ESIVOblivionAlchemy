@@ -20,7 +20,7 @@ class IngredientList extends Component {
         })
 
         return (
-            <div className="row row-cols-1 row-cols-md-3 m-3">
+            <div className="row row-cols-1 row-cols-md-5 m-3">
                 {ingredientComponents}
             </div>
         )

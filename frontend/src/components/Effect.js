@@ -17,16 +17,16 @@ class Effect extends Component {
         const reducer = (accumulator, currentValue) => accumulator + currentValue;
         const ingredientTotal = ingredientTotalsArray.reduce(reducer);
 
-
         return (
-            <div className="col mb-4">
-                <div className="card">
-                    <div className="card-header d-flex justify-content-between align-items-center">
+            <div className="col my-4">
+                <div className="card h-100 border-0 shadow-lg">
+                    <div className="card-header pl-3 pt-3 pr-1 pb-0">
                         <div className="card-title font-weight-bolder">
                             {this.props.effect.effectName}
-                            <span className="badge badge-primary ml-3">{ingredientTotal}</span>
+                            <span className="badge badge-dark ml-3">{ingredientTotal}</span>
                         </div>
-                        <div>
+                        <div className="d-flex justify-content-end">
+
 
                             {this.state.showEffectEdit
                                 ?
@@ -71,7 +71,7 @@ class Effect extends Component {
                     
                     {this.state.showEffectEdit
                         ?
-                        <div className="card card-body">
+                        <div className="card card-body p-0 bg-dark">
                             <EffectEdit
                                 effect={this.props.effect}
                                 index={this.props.index}

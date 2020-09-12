@@ -14,20 +14,21 @@ class EffectEdit extends Component {
         error: ''
     }
 
+    
+    componentDidMount() {
+        this.setState({
+            modifyEffect: {
+                effectName: this.props.effect.effectName,
+            }
+        });
+    };
+
     handleChange = (event) => {
         const inputName = event.target.name
         const inputValue = event.target.value
         const modifyEffect = { ...this.state.modifyEffect }
         modifyEffect[inputName] = inputValue
         this.setState({ modifyEffect: modifyEffect })
-    }
-
-    handleonFocus = (event) => {
-        this.setState({
-            modifyEffect: {
-                effectName: this.props.effect.effectName
-            }
-        })
     }
 
     submitEffect = (event) => {
@@ -87,7 +88,7 @@ class EffectEdit extends Component {
     render() {
 
         return (
-            <div>
+            <div className="bg-dark text-white p-2">
                 <form onSubmit={this.submitEffect} className="m-2">
                     {this.state.effectDeleted
                         ? <div className="text-danger">{this.state.deletedEffect.effectName} has been deleted</div>
@@ -100,7 +101,6 @@ class EffectEdit extends Component {
                                 id={"editEffectName" + this.props.index}
                                 name="effectName"
                                 placeholder={this.props.effect.effectName}
-                                // onFocus={this.handleonFocus}
                                 onChange={this.handleChange}
                                 value={this.state.modifyEffect.effectName}
                                 required
