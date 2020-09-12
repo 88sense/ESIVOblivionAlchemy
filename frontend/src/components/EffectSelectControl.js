@@ -23,7 +23,7 @@ class EffectSelectControl extends Component {
                     id={this.props.selectId}
                     name={this.props.selectId}
                     onChange={this.props.handleChange}
-                    value={this.props.selectedOption}
+                    value={this.props.value}
                 >
                     <option value="">Select an Effect</option>
                     {effectSelectOptionComponents}

@@ -30,10 +30,10 @@ class IngredientCreate extends Component {
         event.preventDefault();
         const newIngredient = {
             ingredientName: this.state.newIngredient.ingredientName,
-            effect01: this.state.newIngredient.addEffect01 === '' ? null : this.state.newIngredient.addEffect01,
-            effect02: this.state.newIngredient.addEffect02 === '' ? null : this.state.newIngredient.addEffect02,
-            effect03: this.state.newIngredient.addEffect03 === '' ? null : this.state.newIngredient.addEffect03,
-            effect04: this.state.newIngredient.addEffect04 === '' ? null : this.state.newIngredient.addEffect04,
+            effect01: (!this.state.newIngredient.addEffect01) ? null : this.state.newIngredient.addEffect01,
+            effect02: (!this.state.newIngredient.addEffect02) ? null : this.state.newIngredient.addEffect02,
+            effect03: (!this.state.newIngredient.addEffect03) ? null : this.state.newIngredient.addEffect03,
+            effect04: (!this.state.newIngredient.addEffect04) ? null : this.state.newIngredient.addEffect04,
             count: this.state.newIngredient.count
         };
         createIngredient(newIngredient)

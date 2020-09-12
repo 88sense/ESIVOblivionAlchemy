@@ -20,6 +20,20 @@ class IngredientEdit extends Component {
         error: '',
     }
 
+    componentDidMount() {
+
+        if (!this.props.ingredient.effect01) {console.log("effect 1 is null")}
+        this.setState({
+            modifyIngredient: {
+                ingredientName: this.props.ingredient.ingredientName,
+                updateEffect01: (!this.props.ingredient.effect01 ? '' : this.props.ingredient.effect01),
+                updateEffect02: (!this.props.ingredient.effect02 ? '' : this.props.ingredient.effect02),
+                updateEffect03: (!this.props.ingredient.effect03 ? '' : this.props.ingredient.effect03),
+                updateEffect04: (!this.props.ingredient.effect04 ? '' : this.props.ingredient.effect04)
+                // count: ''
+            }
+        });      };
+
     handleChange = (event) => {
         const inputName = event.target.name
         const inputValue = event.target.value
@@ -33,11 +47,11 @@ class IngredientEdit extends Component {
         event.preventDefault();
         const modifyIngredient = {
             ingredientName: this.state.modifyIngredient.ingredientName,
-            effect01: this.state.modifyIngredient.updateEffect01 === '' ? null : this.state.modifyIngredient.updateEffect01,
-            effect02: this.state.modifyIngredient.updateEffect02 === '' ? null : this.state.modifyIngredient.updateEffect02,
-            effect03: this.state.modifyIngredient.updateEffect03 === '' ? null : this.state.modifyIngredient.updateEffect03,
-            effect04: this.state.modifyIngredient.updateEffect04 === '' ? null : this.state.modifyIngredient.updateEffect04,
-            count: this.state.modifyIngredient.count
+            effect01: (!this.state.modifyIngredient.updateEffect01) ? null : this.state.modifyIngredient.updateEffect01,
+            effect02: (!this.state.modifyIngredient.updateEffect02) ? null : this.state.modifyIngredient.updateEffect02,
+            effect03: (!this.state.modifyIngredient.updateEffect03) ? null : this.state.modifyIngredient.updateEffect03,
+            effect04: (!this.state.modifyIngredient.updateEffect04) ? null : this.state.modifyIngredient.updateEffect04,
+            // count: this.state.modifyIngredient.count
         };
         console.log(modifyIngredient)
         updateIngredient(this.props.ingredient._id, modifyIngredient)
@@ -51,16 +65,15 @@ class IngredientEdit extends Component {
                     });
                 } else {
                     this.props.updateIngredients(updatedIngredient.ingredient);
-                    this.setState({
-                        modifyIngredient: {
-                            ingredientName: '',
-                            updateEffect01: '',
-                            updateEffect02: '',
-                            updateEffect03: '',
-                            updateEffect04: '',
-                            count: ''
-                        }
-                    });
+                    // this.setState({
+                    //     modifyIngredient: {
+                    //         ingredientName: '',
+                    //         updateEffect01: '',
+                    //         updateEffect02: '',
+                    //         updateEffect03: '',
+                    //         updateEffect04: '',
+                    //     }
+                    // });
                     this.props.toggleIngredientEdit();
                 }
 
@@ -128,9 +141,8 @@ class IngredientEdit extends Component {
                                     effects={this.props.effects}
                                     label="Update Effect 01"
                                     selectId="updateEffect01"
-                                    value={this.props.ingredient.effect01}
-                                    selectedOption={this.state.modifyIngredient.effect01 ? this.state.modifyIngredient.effect01 : ""}
                                     handleChange={this.handleChange}
+                                    value={this.state.modifyIngredient.updateEffect01}
                                 />
                             </div>
                             <div className="row my-2">
@@ -138,9 +150,8 @@ class IngredientEdit extends Component {
                                     effects={this.props.effects}
                                     label="Update Effect 02"
                                     selectId="updateEffect02"
-                                    value={this.props.ingredient.effect02}
-                                    selectedOption={this.state.modifyIngredient.effect02 ? this.state.modifyIngredient.effect02 : ""}
                                     handleChange={this.handleChange}
+                                    value={this.state.modifyIngredient.updateEffect02}
                                 />
                             </div>
 
@@ -149,9 +160,8 @@ class IngredientEdit extends Component {
                                     effects={this.props.effects}
                                     label="Update Effect 03"
                                     selectId="updateEffect03"
-                                    value={this.props.ingredient.effect03}
-                                    selectedOption={this.state.modifyIngredient.effect03 ? this.state.modifyIngredient.effect03 : ""}
                                     handleChange={this.handleChange}
+                                    value={this.state.modifyIngredient.updateEffect03}
                                 />
                             </div>
                             <div className="row my-2">
@@ -159,9 +169,8 @@ class IngredientEdit extends Component {
                                     effects={this.props.effects}
                                     label="Update Effect 04"
                                     selectId="updateEffect04"
-                                    value={this.props.ingredient.effect04}
-                                    selectedOption={this.state.modifyIngredient.effect04 ? this.state.modifyIngredient.effect04 : ""}
                                     handleChange={this.handleChange}
+                                    value={this.state.modifyIngredient.updateEffect04}
 
                                 />
                             </div>

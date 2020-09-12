@@ -39,9 +39,6 @@ class App extends Component {
             return 1;
           }
         })
-        effectsResults.effects.forEach(effect => {
-          effectCodex[effect._id] = { name: effect.effectName, relatedIngredients: {} }
-        })
         ingredientIndex()
           .then(ingredientsResults => {
             console.log(ingredientsResults)
@@ -53,6 +50,9 @@ class App extends Component {
               } else {
                 return 1;
               }
+            })
+            effectsResults.effects.forEach(effect => {
+              effectCodex[effect._id] = { name: effect.effectName, relatedIngredients: {} }
             })
             ingredientsResults.ingredients.forEach(ingredient => {
               if (effectCodex[ingredient.effect01]) {
