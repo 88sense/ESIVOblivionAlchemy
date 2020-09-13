@@ -10,8 +10,18 @@ class Navbar extends Component {
                 </button>
                 <div className="collapse navbar-collapse mr-auto" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <button className="btn btn-outline-secondary mx-2 active" type="button">Ingredients</button>
-                        <button className="btn btn-outline-secondary mx-2" type="button">Effects</button>
+                        <button type="button" className="btn btn-dark btn-outline-secondary mx-2"
+                            onClick={this.props.toggleIngredientList}
+                        >
+                            Ingredients
+                        </button>
+
+                        <button type="button" className="btn btn-dark btn-outline-secondary mx-2"
+                            onClick={this.props.toggleEffectList}
+                        >
+                            Effects
+                        </button>
+
                     </div>
                 </div>
                 <div className="h1 navbar-brand mb-0" id="siteTitle">Alchemy ESIV Oblivion</div>
@@ -24,3 +34,6 @@ class Navbar extends Component {
 }
 
 export default Navbar
+
+// toggleIngredientList={this.toggleIngredientList}
+// toggleEffectList={this.toggleEffectList}

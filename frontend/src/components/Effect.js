@@ -12,7 +12,7 @@ class Effect extends Component {
     }
 
     render() {
-        
+
         // Calculate sum of Ingredients related to Effect from values in relatedIngredients object
         let ingredientTotal = 0;
         let ingredientTotalsArray = [];
@@ -26,14 +26,15 @@ class Effect extends Component {
 
         return (
             <div className="col my-4">
-                <div className="card h-100 border-0 shadow-lg">
-                    <div className="card-header pl-3 pt-3 pr-1 pb-0">
-                        <div className="card-title font-weight-bolder">
-                            {this.props.effect.effectName}
-                            <span className="badge badge-dark ml-3">{ingredientTotal}</span>
-                        </div>
-                        <div className="d-flex justify-content-end">
+                <div className="card h-100 border-0 effectHeader shadow-lg">
+                    <div className="card-header pl-3 pr-1 py-0 cardHeader effectHeader">
+                        <span className="badge badge-dark p-3 mb-3">{ingredientTotal}</span>
 
+                        <div className="h5 card-title font-weight-bolder mr-2 mb-3 text-right">
+                            {this.props.effect.effectName}
+                        </div>
+                        
+                        <div className="d-flex justify-content-end">
 
                             {this.state.showEffectEdit
                                 ?
@@ -75,10 +76,9 @@ class Effect extends Component {
                         </div>
 
                     </div>
-
-                    {this.state.showEffectEdit
-                        ?
-                        <div className="card card-body p-0 bg-dark">
+                    <div className="card card-body p-0 bg-secondary">
+                        {this.state.showEffectEdit
+                            ?
                             <EffectEdit
                                 effect={this.props.effect}
                                 index={this.props.index}
@@ -86,18 +86,18 @@ class Effect extends Component {
                                 deleteFromEffects={this.props.deleteFromEffects}
                                 toggleEffectEdit={this.toggleEffectEdit}
                             />
+                            : null
+                        }
+
+                        <div className="collapse" id={"relatedIngredientsList" + this.props.index}>
+                            < EffectRelatedIngredientList
+                                effectCodex={this.props.effectCodex}
+                                effect={this.props.effect}
+
+                            />
                         </div>
-                        : null
-
-                    }
-
-                    <div className="collapse" id={"relatedIngredientsList" + this.props.index}>
-                        < EffectRelatedIngredientList
-                            effectCodex={this.props.effectCodex}
-                            effect={this.props.effect}
-
-                        />
                     </div>
+
                 </div>
             </div>
         )

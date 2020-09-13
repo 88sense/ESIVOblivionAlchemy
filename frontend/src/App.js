@@ -206,6 +206,8 @@ class App extends Component {
               : null
             }
 
+{/* Photo credit */}
+            {/* <span className="text-light">Photo by <a href="https://unsplash.com/@mbriney?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Matt Briney</a> on <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span> */}
           </div>
         </section>
       </div>

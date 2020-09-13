@@ -18,7 +18,14 @@ body {
   height: 100vh;
 }
 
-.ingredientHeaderBg {
+.cardHeader {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.ingredientHeader {
   background-color: #c7a589;
-  font-family: 'Special Elite', cursive;
+}
+
+.effectHeader {
+background-color: #a8bbaf;
 }

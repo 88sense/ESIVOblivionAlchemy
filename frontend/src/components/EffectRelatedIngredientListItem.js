@@ -5,7 +5,10 @@ class EffectRelatedIngredientListItem extends Component {
     render() {
 
         return (
-        <li className="list-group-item">{this.props.relatedIngredient} {this.props.relatedIngredientCount}</li>
+            <li className="list-group-item d-flex flex-row justify-content-between">
+                <div>{this.props.relatedIngredient}</div>
+                <div>{this.props.relatedIngredientCount}</div>
+            </li>
         )
     }
 

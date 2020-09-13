@@ -65,13 +65,17 @@ class Ingredient extends Component {
         return (
             <div className="col my-4">
                 <div className="card h-100 border-0 shadow-lg">
-                    <div className="card-header pl-3 pt-3 pr-1 pb-0 ingredientHeaderBg">
-                        <div className="h5 card-title font-weight-bolder">
+                    <div className="card-header pl-3 pt-3 pr-1 pb-0 ingredientHeader">
+                        <div className="h5 card-title font-weight-bolder cardHeader mb-4">
                             {this.props.ingredient.ingredientName}
-                            <span className="badge badge-dark ml-3">{this.props.ingredient.count}</span>
                         </div>
-                        <div className="d-flex justify-content-end">
-
+                        <div className="d-flex justify-content-between">
+                            <div>
+                                {/* Display Ingredient Count */}
+                                <button type="button" className="btn btn-dark btn-sm px-3 mr-1 text-light">
+                                    {this.props.ingredient.count}
+                                </button>
+                            </div>
 
                             {this.state.showIngredientEdit
                                 ?
@@ -89,6 +93,7 @@ class Ingredient extends Component {
                                 </div>
                                 :
                                 <div>
+
                                     {/* Increase Ingredient Count */}
                                     <button type="button" className="btn btn-dark btn-sm mr-1 text-success"
                                         onClick={this.increaseCount}
@@ -125,7 +130,7 @@ class Ingredient extends Component {
 
                     {this.state.showIngredientEdit
                         ?
-                        <div className="card card-body p-0 bg-dark ">
+                        <div className="card card-body p-0 bg-dark">
                             <IngredientEdit
                                 ingredient={this.props.ingredient}
                                 index={this.props.index}
