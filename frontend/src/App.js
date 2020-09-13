@@ -19,7 +19,8 @@ class App extends Component {
       }
     },
     showIngredientList: true,
-    showEffectList: false
+    showEffectList: false,
+    searchText: ''
   };
 
   componentDidMount() {
@@ -155,6 +156,10 @@ class App extends Component {
     }))
   }
 
+  handleSearchText = (event) => {
+    this.setState({ searchText: event.target.value })
+}
+
 
   render() {
 
@@ -175,6 +180,7 @@ class App extends Component {
               effects={this.state.effects}
               addToEffects={this.addToEffects}
               addToIngredients={this.addToIngredients}
+              handleSearchText={this.handleSearchText}
             />
           </div>
 
@@ -190,6 +196,7 @@ class App extends Component {
                 effectCodex={this.state.effectCodex}
                 updateIngredients={this.updateIngredients}
                 deleteFromIngredients={this.deleteFromIngredients}
+                searchText={this.state.searchText}
               />
               : null
             }
@@ -202,6 +209,7 @@ class App extends Component {
                 effectCodex={this.state.effectCodex}
                 updateEffects={this.updateEffects}
                 deleteFromEffects={this.deleteFromEffects}
+                searchText={this.state.searchText}
               />
               : null
             }
