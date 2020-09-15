@@ -20,7 +20,14 @@ class App extends Component {
     },
     showIngredientList: true,
     showEffectList: false,
-    searchText: ''
+    searchText: '',
+    selectedEffects: {
+      filterEffect01: '',
+      filterEffect02: '',
+      filterEffect03: '',
+      filterEffect04: '',
+    }
+
   };
 
   componentDidMount() {
@@ -159,6 +166,19 @@ class App extends Component {
   handleSearchText = (event) => {
     this.setState({ searchText: event.target.value })
 }
+handleEffectSelect = (event) => {
+  const inputName = event.target.name
+  const inputValue = event.target.value
+  const selectedEffects = { ...this.state.selectedEffects }
+  selectedEffects[inputName] = inputValue
+  this.setState({ selectedEffects: selectedEffects })
+}
+// selectedEffects: {
+//   effect01: '',
+//   effect02: '',
+//   effect03: '',
+//   effect04: '',
+// }
 
 
   render() {
@@ -168,7 +188,9 @@ class App extends Component {
         <header>
           <Navbar
             toggleIngredientList={this.toggleIngredientList}
+            ingredientsTotal={this.state.ingredients.length}
             toggleEffectList={this.toggleEffectList}
+            effectsTotal={this.state.effects.length}
           />
         </header>
 
@@ -181,6 +203,7 @@ class App extends Component {
               addToEffects={this.addToEffects}
               addToIngredients={this.addToIngredients}
               handleSearchText={this.handleSearchText}
+              handleChange={this.handleEffectSelect}
             />
           </div>
 
@@ -197,6 +220,7 @@ class App extends Component {
                 updateIngredients={this.updateIngredients}
                 deleteFromIngredients={this.deleteFromIngredients}
                 searchText={this.state.searchText}
+                selectedEffects={this.state.selectedEffects}
               />
               : null
             }

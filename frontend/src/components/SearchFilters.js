@@ -78,6 +78,7 @@ class SearchFilters extends Component {
                 <div className="m-3">
                     <EffectFilters
                         effects={this.props.effects}
+                        handleChange={this.props.handleChange}
                     />
                 </div>
             </div>

@@ -10,16 +10,18 @@ class Navbar extends Component {
                 </button>
                 <div className="collapse navbar-collapse mr-auto" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <button type="button" className="btn btn-dark btn-outline-secondary mx-2"
+                        <button type="button" className="btn btn-dark btn-outline-secondary text-white mx-2"
                             onClick={this.props.toggleIngredientList}
                         >
                             Ingredients
+                            <span className="badge badge-secondary ml-3 px-2">{this.props.ingredientsTotal}</span>
                         </button>
 
-                        <button type="button" className="btn btn-dark btn-outline-secondary mx-2"
+                        <button type="button" className="btn btn-dark btn-outline-secondary text-white mx-2"
                             onClick={this.props.toggleEffectList}
                         >
                             Effects
+                            <span className="badge badge-secondary ml-3 px-2">{this.props.effectsTotal}</span>
                         </button>
 
                     </div>
