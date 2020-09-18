@@ -167,18 +167,24 @@ class App extends Component {
     this.setState({ searchText: event.target.value })
 }
 handleEffectSelect = (event) => {
+  const selectedEffects = { ...this.state.selectedEffects }
   const inputName = event.target.name
   const inputValue = event.target.value
-  const selectedEffects = { ...this.state.selectedEffects }
   selectedEffects[inputName] = inputValue
+  if(!selectedEffects.filterEffect01) {
+    selectedEffects.filterEffect02 = ""
+    selectedEffects.filterEffect03 = ""
+    selectedEffects.filterEffect04 = ""
+  }
+  if(!selectedEffects.filterEffect02) {
+    selectedEffects.filterEffect03 = ""
+    selectedEffects.filterEffect04 = ""
+  }
+  if(!selectedEffects.filterEffect03) {
+    selectedEffects.filterEffect04 = ""
+  }
   this.setState({ selectedEffects: selectedEffects })
 }
-// selectedEffects: {
-//   effect01: '',
-//   effect02: '',
-//   effect03: '',
-//   effect04: '',
-// }
 
 
   render() {
@@ -204,6 +210,7 @@ handleEffectSelect = (event) => {
               addToIngredients={this.addToIngredients}
               handleSearchText={this.handleSearchText}
               handleChange={this.handleEffectSelect}
+              selectedEffects={this.state.selectedEffects}
             />
           </div>
 
