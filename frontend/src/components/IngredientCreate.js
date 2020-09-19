@@ -6,10 +6,10 @@ class IngredientCreate extends Component {
     state = {
         newIngredient: {
             ingredientName: '',
-            addEffect01: '',
-            addEffect02: '',
-            addEffect03: '',
-            addEffect04: '',
+            filterEffect01: '',
+            filterEffect02: '',
+            filterEffect03: '',
+            filterEffect04: '',
             count: 1
         },
         dbError: false,
@@ -25,6 +25,25 @@ class IngredientCreate extends Component {
         this.setState({ newIngredient: newIngredient })
     }
 
+    handleEffectSelect = (event) => {
+        const newIngredient = { ...this.state.newIngredient }
+        const inputName = event.target.name
+        const inputValue = event.target.value
+        newIngredient[inputName] = inputValue
+        if (!newIngredient.filterEffect01) {
+            newIngredient.filterEffect02 = ""
+            newIngredient.filterEffect03 = ""
+            newIngredient.filterEffect04 = ""
+        }
+        if (!newIngredient.filterEffect02) {
+            newIngredient.filterEffect03 = ""
+            newIngredient.filterEffect04 = ""
+        }
+        if (!newIngredient.filterEffect03) {
+            newIngredient.filterEffect04 = ""
+        }
+        this.setState({ newIngredient: newIngredient })
+    }
 
     submitIngredient = (event) => {
         event.preventDefault();
@@ -50,10 +69,10 @@ class IngredientCreate extends Component {
                     this.setState({
                         newIngredient: {
                             ingredientName: '',
-                            addEffect01: '',
-                            addEffect02: '',
-                            addEffect03: '',
-                            addEffect04: '',
+                            filterEffect01: '',
+                            filterEffect02: '',
+                            filterEffect03: '',
+                            filterEffect04: '',
                             count: 1
                         }
                     });
@@ -108,16 +127,22 @@ class IngredientCreate extends Component {
                         <EffectSelectControl
                             effects={this.props.effects}
                             label="Add Effect 01"
-                            selectId="addEffect01"
+                            selectId="filterEffect01"
                             value={this.state.newIngredient.addEffect01}
-                            handleChange={this.handleChange}
+                            handleChange={this.handleEffectSelect}
+                            selectedEffects=""
+                            disabled={false}
                         />
                         <EffectSelectControl
                             effects={this.props.effects}
                             label="Add Effect 02"
-                            selectId="addEffect02"
-                            value={this.state.newIngredient.addEffect02}
-                            handleChange={this.handleChange}
+                            labelColor={(!this.state.newIngredient.filterEffect01) ? "text-dark" : "text-light"}
+                            selectId="filterEffect02"
+                            value={this.state.newIngredient.filterEffect02}
+                            handleChange={this.handleEffectSelect}
+                            selectedEffects={this.state.newIngredient}
+                            // Disable select control if filter 1 is empty
+                            disabled={(!this.state.newIngredient.filterEffect01) ? true : false}
                         />
                     </div>
 
@@ -125,16 +150,25 @@ class IngredientCreate extends Component {
                         <EffectSelectControl
                             effects={this.props.effects}
                             label="Add Effect 03"
-                            selectId="addEffect03"
-                            value={this.state.newIngredient.addEffect03}
-                            handleChange={this.handleChange}
+                            labelColor={(!this.state.newIngredient.filterEffect02) ? "text-dark" : "text-light"}
+                            selectId="filterEffect03"
+                            value={this.state.newIngredient.filterEffect03}
+                            handleChange={this.handleEffectSelect}
+                            selectedEffects={this.state.newIngredient}
+                            // Disable select control if filter 2 is empty
+                            disabled={!this.state.newIngredient.filterEffect02 ? true : false}
+
                         />
                         <EffectSelectControl
                             effects={this.props.effects}
                             label="Add Effect 04"
-                            selectId="addEffect04"
+                            labelColor={(!this.state.newIngredient.filterEffect03) ? "text-dark" : "text-light"}
+                            selectId="filterEffect04"
                             value={this.state.newIngredient.addEffect04}
-                            handleChange={this.handleChange}
+                            handleChange={this.handleEffectSelect}
+                            selectedEffects={this.state.newIngredient}
+                            // Disable select control if filter 3 is empty
+                            disabled={(!this.state.newIngredient.filterEffect03) ? true : false}
 
                         />
                     </div>

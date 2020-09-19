@@ -13,14 +13,16 @@ class EffectSelectControl extends Component {
         const filterEffect04 = this.props.selectedEffects.filterEffect04
 
         const effectSelectOptionComponents = effects.map((effect, index) => {
+           let disabled = false
             if (effect._id === filterEffect01 || effect._id === filterEffect02 ||
                 effect._id === filterEffect03 || effect._id === filterEffect04
-            ) { return null }
+            ) { disabled = true}
 
             return <EffectSelectOption
                 key={effect._id}
                 index={index}
                 effect={effect}
+                disabled={disabled}
             />
         })
 
@@ -29,7 +31,7 @@ class EffectSelectControl extends Component {
             <div className="col">
                 <label htmlFor={this.props.selectId}
                     // If select is disabled, change style
-                    className={(this.props.disabled) ? "text-light" : "text-dark"}
+                    className={this.props.labelColor}
                 >{this.props.label}</label>
                 <select
                     disabled={this.props.disabled}
