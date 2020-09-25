@@ -80,7 +80,7 @@ class Navbar extends Component {
                     </ul>
                 </div>
 
-                <div className="h1 navbar-brand mb-0" id="siteTitle">Alchemy ESIV Oblivion</div>
+                <div className="h1 navbar-brand mb-0" id="siteTitle">ESIV Oblivion Alchemy</div>
 
             </nav>
         )
