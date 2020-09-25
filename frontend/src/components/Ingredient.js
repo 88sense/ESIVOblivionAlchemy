@@ -66,7 +66,7 @@ class Ingredient extends Component {
             <div className="col my-4">
                 <div className="card h-100 border-0 shadow-lg">
                     <div className="card-header pl-3 pt-3 pr-1 pb-0 ingredientHeader">
-                        <div className="h5 card-title font-weight-bolder cardHeader mb-4">
+                        <div className="h5 text-truncate card-title font-weight-bolder cardHeader mb-4">
                             {this.props.ingredient.ingredientName}
                         </div>
                         <div className="d-flex justify-content-between">

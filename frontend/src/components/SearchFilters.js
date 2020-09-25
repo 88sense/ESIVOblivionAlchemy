@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import IngredientCreate from './IngredientCreate';
-import EffectCreate from './EffectCreate';
 import EffectFilters from './EffectFilters'
 
 class SearchFilters extends Component {
@@ -19,60 +17,25 @@ class SearchFilters extends Component {
     render() {
 
         return (
-            <div>
-                <div className="d-flex flex-row justify-content-between pb-1">
-                    <div className="flex-grow-1 form-group m-3">
-                        <label htmlFor="textSearch" className="col-form-label" hidden>Search</label>
-                        <div className="col-sm-8">
-                            <input type="search"
-                                className="form-control border border-dark"
-                                id="textSearch"
-                                placeholder="Enter Search..."
-                                onChange={this.props.handleSearchText}
-                            />
-
+            <div className="mt-5 mb-4">
+                <div className="m-3">
+                    <label htmlFor="textSearch" className="sr-only">Search</label>
+                    <div className="input-group border border-secondary rounded">
+                        <div className="input-group-prepend">
+                            <div className="input-group-text">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fillRule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                    <path fillRule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                                </svg>
+                            </div>
                         </div>
+                        <input type="search"
+                            className="form-control"
+                            id="textSearch"
+                            placeholder="Enter Search..."
+                            onChange={this.props.handleSearchText}
+                        />
                     </div>
-
-                    <div className="m-3">
-                        <div className="btn-group ml-2">
-                            {/* Display disable buttons when create forms are showing */}
-                            <button type="button"
-                                className={this.state.showEffectCreate ? "btn btn-secondary disabled" : "btn btn-outline-dark"}
-                                onClick={this.toggleEffectCreate}
-                            >
-                                Create Effect
-                                </button>
-                        </div>
-                        <div className="btn-group ml-2">
-                            {/* Display disable buttons when create forms are showing */}
-                            <button type="button"
-                                className={this.state.showIngredientCreate ? "btn btn-secondary disabled" : "btn btn-outline-dark"}
-                                onClick={this.toggleIngredientCreate}
-                            >
-                                Create Ingredient
-                                </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    {/* Create Effect form  */}
-                    {this.state.showEffectCreate
-                        ? <EffectCreate
-                            addToEffects={this.props.addToEffects}
-                            toggleEffectCreate={this.toggleEffectCreate} />
-                        : null
-                    }
-
-                    {/* Create Ingredient form  */}
-                    {this.state.showIngredientCreate
-                        ? <IngredientCreate
-                            effects={this.props.effects}
-                            addToIngredients={this.props.addToIngredients}
-                            toggleIngredientCreate={this.toggleIngredientCreate} />
-                        : null
-                    }
                 </div>
 
                 <div className="m-3">
@@ -82,7 +45,7 @@ class SearchFilters extends Component {
                         selectedEffects={this.props.selectedEffects}
                     />
                 </div>
-            </div>
+            </div >
         )
     }
 

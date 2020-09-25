@@ -27,7 +27,7 @@ class Effect extends Component {
         return (
             <div className="col my-4">
                 <div className="card h-100 border-0 effectHeader shadow-lg">
-                    <div className="card-header pl-3 pr-1 py-0 cardHeader effectHeader">
+                    <div className="card-header pl-3 pr-1 py-0 text-truncate cardHeader effectHeader">
                         <span className="badge badge-dark p-3 mb-3">{ingredientTotal}</span>
 
                         <div className="h5 card-title font-weight-bolder mr-2 mb-3 text-right">

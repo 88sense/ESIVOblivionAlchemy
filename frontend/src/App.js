@@ -6,6 +6,8 @@ import Navbar from './components/Navbar';
 import SearchFilters from './components/SearchFilters';
 import IngredientList from './components/IngredientList';
 import EffectList from './components/EffectList';
+import IngredientCreate from './components/IngredientCreate';
+import EffectCreate from './components/EffectCreate';
 
 class App extends Component {
 
@@ -26,8 +28,22 @@ class App extends Component {
       filterEffect02: '',
       filterEffect03: '',
       filterEffect04: '',
-    }
+    },
+    showEffectCreate: false,
+    showIngredientCreate: false,
+    showFilters: true
+  };
 
+
+  toggleEffectCreate = () => {
+    this.setState(state => ({ showEffectCreate: !state.showEffectCreate }))
+  };
+  toggleIngredientCreate = () => {
+    this.setState(state => ({ showIngredientCreate: !state.showIngredientCreate }))
+  };
+
+  toggleFilters = () => {
+    this.setState(state => ({ showFilters: !state.showFilters }))
   };
 
   componentDidMount() {
@@ -165,58 +181,89 @@ class App extends Component {
 
   handleSearchText = (event) => {
     this.setState({ searchText: event.target.value })
-}
-handleEffectSelect = (event) => {
-  const selectedEffects = { ...this.state.selectedEffects }
-  const inputName = event.target.name
-  const inputValue = event.target.value
-  selectedEffects[inputName] = inputValue
-  if(!selectedEffects.filterEffect01) {
-    selectedEffects.filterEffect02 = ""
-    selectedEffects.filterEffect03 = ""
-    selectedEffects.filterEffect04 = ""
   }
-  if(!selectedEffects.filterEffect02) {
-    selectedEffects.filterEffect03 = ""
-    selectedEffects.filterEffect04 = ""
+  handleEffectSelect = (event) => {
+    const selectedEffects = { ...this.state.selectedEffects }
+    const inputName = event.target.name
+    const inputValue = event.target.value
+    selectedEffects[inputName] = inputValue
+    if (!selectedEffects.filterEffect01) {
+      selectedEffects.filterEffect02 = ""
+      selectedEffects.filterEffect03 = ""
+      selectedEffects.filterEffect04 = ""
+    }
+    if (!selectedEffects.filterEffect02) {
+      selectedEffects.filterEffect03 = ""
+      selectedEffects.filterEffect04 = ""
+    }
+    if (!selectedEffects.filterEffect03) {
+      selectedEffects.filterEffect04 = ""
+    }
+    this.setState({ selectedEffects: selectedEffects })
   }
-  if(!selectedEffects.filterEffect03) {
-    selectedEffects.filterEffect04 = ""
-  }
-  this.setState({ selectedEffects: selectedEffects })
-}
 
 
   render() {
 
     return (
-      <div className="container-fluid">
+      <div className="container-fluid pt-4 px-0 m-0" >
         <header>
           <Navbar
             toggleIngredientList={this.toggleIngredientList}
             ingredientsTotal={this.state.ingredients.length}
             toggleEffectList={this.toggleEffectList}
             effectsTotal={this.state.effects.length}
+            showEffectCreate={this.state.showEffectCreate}
+            showFilters={this.state.showFilters}
+            toggleFilters={this.toggleFilters}
+            toggleEffectCreate={this.toggleEffectCreate}
+            toggleIngredientCreate={this.toggleIngredientCreate}
           />
         </header>
 
+        {/* Filters and Create Forms */}
         <section>
-          {/* Filters */}
 
-          <div className="bg-light pt-4 pb-2">
-            <SearchFilters
-              effects={this.state.effects}
-              addToEffects={this.addToEffects}
-              addToIngredients={this.addToIngredients}
-              handleSearchText={this.handleSearchText}
-              handleChange={this.handleEffectSelect}
-              selectedEffects={this.state.selectedEffects}
-            />
+          <div>
+            {/* Create Effect form  */}
+            {this.state.showEffectCreate
+              ? <EffectCreate
+                addToEffects={this.props.addToEffects}
+                toggleEffectCreate={this.toggleEffectCreate} />
+              : null
+            }
+
+            {/* Create Ingredient form  */}
+            {this.state.showIngredientCreate
+              ? <IngredientCreate
+                effects={this.state.effects}
+                addToIngredients={this.props.addToIngredients}
+                toggleIngredientCreate={this.toggleIngredientCreate} />
+              : null
+            }
           </div>
 
-          {/* Filtered Results */}
-          <div className="overflow-auto py-4" id="resultList">
+          {/* Text Search and Effect Filters */}
+          {this.state.showFilters
+            ?
+            <div className="bg-light pt-4 pb-2">
+              <SearchFilters
+                effects={this.state.effects}
+                addToEffects={this.addToEffects}
+                addToIngredients={this.addToIngredients}
+                handleSearchText={this.handleSearchText}
+                handleChange={this.handleEffectSelect}
+                selectedEffects={this.state.selectedEffects}
+              />
+            </div>
+            : null
+          }
+        </section>
 
+        {/* Filtered Results */}
+        <section id="resultList" >
+
+          <div>
             {/* Show List of Ingredients? */}
             {this.state.showIngredientList
               ?
@@ -245,10 +292,12 @@ handleEffectSelect = (event) => {
               : null
             }
 
-{/* Photo credit */}
+            {/* Photo credit */}
             {/* <span className="text-light">Photo by <a href="https://unsplash.com/@mbriney?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Matt Briney</a> on <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span> */}
+
           </div>
         </section>
+
       </div>
 
     );
