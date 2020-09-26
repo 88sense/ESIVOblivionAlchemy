@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./server/bin/www"
+    "start": "node ./server/bin/www",
+    "dev": "node -r dotenv/config ./server/bin/www",
+    "postinstall": "cd client && npm i && npm run build"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -15,6 +17,14 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "nodemon": "^2.0.4"
+  },
+  "nodemonConfig": {
+    "exec": "npm run dev",
+    "watch": [
+      "server/*",
+      "frontend/*"
+    ]
   }
 }
