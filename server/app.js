@@ -12,7 +12,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../frontend/build/')));
 
 app.use('/api/v1', indexRouter);
 // app.use('/users', usersRouter);
