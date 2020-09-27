@@ -206,8 +206,9 @@ class App extends Component {
   render() {
 
     return (
-      <div className="container-fluid pt-4 px-0 m-0" >
-        <header>
+      <div className="container-fluid p-0 m-0" id="alchemy">
+        <header id="headerNavSearchFilter">
+          {/* Navigation Bar */}
           <Navbar
             toggleIngredientList={this.toggleIngredientList}
             ingredientsTotal={this.state.ingredients.length}
@@ -219,11 +220,8 @@ class App extends Component {
             toggleEffectCreate={this.toggleEffectCreate}
             toggleIngredientCreate={this.toggleIngredientCreate}
           />
-        </header>
 
-        {/* Filters and Create Forms */}
-        <section>
-
+          {/* Create forms  */}
           <div>
             {/* Create Effect form  */}
             {this.state.showEffectCreate
@@ -246,7 +244,7 @@ class App extends Component {
           {/* Text Search and Effect Filters */}
           {this.state.showFilters
             ?
-            <div className="bg-light pt-4 pb-2">
+            <div className="bg-light pt-4 pb-2 px-4">
               <SearchFilters
                 effects={this.state.effects}
                 addToEffects={this.addToEffects}
@@ -258,11 +256,10 @@ class App extends Component {
             </div>
             : null
           }
-        </section>
+        </header>
 
         {/* Filtered Results */}
-        <section id="resultList" >
-
+        <section id="resultList" className="mt-5">
           <div>
             {/* Show List of Ingredients? */}
             {this.state.showIngredientList

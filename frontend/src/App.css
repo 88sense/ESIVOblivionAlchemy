@@ -3,18 +3,11 @@ body {
   height: 95vh;
   padding: none;
   margin: none;
+
 }
+
 #alchemy {
- 
-}
-
-#siteTitle {
-  font-family: 'Josefin Slab', serif;
-}
-
-
-#resultList {
-  background: 
+   background: 
     linear-gradient(
     rgba(255, 255, 255, 0.75),
     rgba(0, 0, 0, 0.75)
@@ -23,7 +16,19 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-  }
+    min-height: 100vh;
+}
+
+#headerNavSearchFilter {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+#siteTitle {
+  font-family: 'Josefin Slab', serif;
+}
 
 .cardHeader {
   font-family: 'Noto Sans JP', sans-serif;
@@ -34,5 +39,5 @@ body {
 }
 
 .effectHeader {
-background-color: #a8bbaf;
+  background-color: #EBD5A7;
 }
