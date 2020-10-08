@@ -88,8 +88,8 @@ class EffectEdit extends Component {
     render() {
 
         return (
-            <div className="bg-dark text-white p-2">
-                <form onSubmit={this.submitEffect} className="m-2">
+            <div className="bg-dark text-white p-3">
+                <form onSubmit={this.submitEffect}>
                     {this.state.effectDeleted
                         ? <div className="text-danger">{this.state.deletedEffect.effectName} has been deleted</div>
                         :

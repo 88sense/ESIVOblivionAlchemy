@@ -30,7 +30,7 @@ class Navbar extends Component {
                                 >
                                     Effects
                                     <span className="sr-only">Effect Count</span>
-                                    <span className="badge badge-secondary ml-3 p-2 ">{this.props.effectsTotal}</span>
+                                    <span className="badge badge-secondary ml-3 p-2 ">{this.props.activeEffectCount}</span>
                                 </button>
 
                                 <button type="button"
@@ -52,7 +52,7 @@ class Navbar extends Component {
                                 >
                                     Ingredients
                                     <span className="sr-only">Ingredient Count</span>
-                                    <span className="badge badge-secondary ml-3 p-2">{this.props.ingredientsTotal}</span>
+                                    <span className="badge badge-secondary ml-3 p-2">{this.props.activeIngredientCount}</span>
                                 </button>
 
                                 <button type="button"

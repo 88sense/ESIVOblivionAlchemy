@@ -34,12 +34,12 @@ body {
   font-family: 'Noto Sans JP', sans-serif;
 }
 
-.ingredientHeader {
-  background-color: #c7a589;
+.effectHeader {
+  background-color: #ebd5a7;
 }
 
-.effectHeader {
-  background-color: #EBD5A7;
+.ingredientHeader {
+  background-color: #c7a589;
 }
 
 .zeroCount {

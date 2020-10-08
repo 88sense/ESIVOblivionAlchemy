@@ -17,7 +17,7 @@ class EffectRelatedIngredientList extends Component {
         })
 
         return (
-            <div className="card card-body">
+            <div className="bg-white px-2 py-3">
                 <ul className="list-group list-group-flush">
                     {relatedIngredientsComponents}
                 </ul>

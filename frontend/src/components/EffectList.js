@@ -4,7 +4,6 @@ import Effect from './Effect';
 class EffectList extends Component {
 
     render() {
-
         const searchText = this.props.searchText;
         const effects = this.props.effects;
         const effectComponents = effects.map((effect, index) => {

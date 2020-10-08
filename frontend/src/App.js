@@ -13,6 +13,8 @@ class App extends Component {
 
   state = {
     ingredients: [],
+    activeIngredientCount: 0,
+    activeEffectCount: 0,
     effects: [],
     effectCodex: {
       '00000000': {
@@ -91,33 +93,56 @@ class App extends Component {
 
   updateEffectCodex = (effects, ingredients) => {
     let effectCodex = {};
+    let activeEffectCount = 0;
+    let activeIngredientCount = 0;
+
     effects.forEach(effect => {
-      effectCodex[effect._id] = { name: effect.effectName, relatedIngredients: {} }
+      effectCodex[effect._id] = {
+        name: effect.effectName,
+        ingredientCount: 0,
+        relatedIngredients: {}
+      }
     })
     ingredients.forEach(ingredient => {
+      if (ingredient.count > 0) { activeIngredientCount++ }
       if (effectCodex[ingredient.effect01]) {
         effectCodex[ingredient.effect01].relatedIngredients[ingredient.ingredientName] =
           ingredient.count;
-        // (effectCodex[ingredient.effect01].relatedIngredients[ingredient.ingredientName] + 1) || 1;
       }
       if (effectCodex[ingredient.effect02]) {
         effectCodex[ingredient.effect02].relatedIngredients[ingredient.ingredientName] =
           ingredient.count;
-        // (effectCodex[ingredient.effect02].relatedIngredients[ingredient.ingredientName] + 1) || 1;
       }
       if (effectCodex[ingredient.effect03]) {
         effectCodex[ingredient.effect03].relatedIngredients[ingredient.ingredientName] =
           ingredient.count;
-        // (effectCodex[ingredient.effect03].relatedIngredients[ingredient.ingredientName] + 1) || 1;
       }
       if (effectCodex[ingredient.effect04]) {
         effectCodex[ingredient.effect04].relatedIngredients[ingredient.ingredientName] =
           ingredient.count;
-
-        // (effectCodex[ingredient.effect04].relatedIngredients[ingredient.ingredientName] + 1) || 1;
       }
     })
-    this.setState({ effectCodex: effectCodex })
+
+    let effectKeys = Object.keys(effectCodex);
+    effectKeys.forEach(effectId => {
+      let ingredientCounter = 0;
+      // If related ingredients are found, add to activeEffectCount, calculate number of active ingredients
+      if (Object.keys(effectCodex[effectId].relatedIngredients).length) {
+        activeEffectCount++
+        let ingredientTotalsArray = Object.values(effectCodex[effectId].relatedIngredients)
+        ingredientCounter = ingredientTotalsArray.reduce(function (accumulator, currentValue) {
+          // If ingredient count is greater than 0 add 1 to ingredient total
+          return accumulator + (currentValue ? 1 : 0)
+        }, 0)
+        effectCodex[effectId].ingredientCount = ingredientCounter;
+      }
+    })
+    console.log(activeEffectCount)
+    this.setState({
+      effectCodex: effectCodex,
+      activeIngredientCount: activeIngredientCount,
+      activeEffectCount: activeEffectCount
+    })
     console.log(effectCodex);
   }
 
@@ -217,9 +242,9 @@ class App extends Component {
           {/* Navigation Bar */}
           <Navbar
             toggleIngredientList={this.toggleIngredientList}
-            ingredientsTotal={this.state.ingredients.length}
+            activeIngredientCount={this.state.activeIngredientCount}
             toggleEffectList={this.toggleEffectList}
-            effectsTotal={this.state.effects.length}
+            activeEffectCount={this.state.activeEffectCount}
             showEffectCreate={this.state.showEffectCreate}
             showFilters={this.state.showFilters}
             toggleFilters={this.toggleFilters}

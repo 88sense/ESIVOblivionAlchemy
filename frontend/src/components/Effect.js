@@ -12,27 +12,14 @@ class Effect extends Component {
     }
 
     render() {
-        // Calculate sum of Ingredients related to Effect from values in relatedIngredients object
-        let ingredientTotal = 0;
-        let ingredientTotalsArray = [];
-        if (this.props.effectCodex[this.props.effect._id]) {
-            ingredientTotalsArray = Object.values(this.props.effectCodex[this.props.effect._id].relatedIngredients)
-        }
-        if (ingredientTotalsArray.length) {
-            let initialValue = 0
-            ingredientTotal = ingredientTotalsArray.reduce(function (accumulator, currentValue) {
-                // If ingredient count is greater than 0 add 1 to ingredient total
-                return accumulator + (currentValue ? 1 : 0)
-            }, initialValue)
-        }
-        let headerColor = "effectHeader";
-        if (ingredientTotal === 0) { headerColor = "zeroCount"}
+
+        const ingredientCount = this.props.effectCodex[this.props.effect._id].ingredientCount
 
         return (
             <div className="col my-4">
                 <div className="card h-100 border-0 bg-transparent">
-                    <div className={"card-header pl-3 pr-1 py-0 text-truncate effectHeader cardHeaderFont " + headerColor}>
-                        <span className="badge badge-dark p-3 mb-3">{ingredientTotal}</span>
+                    <div className={"card-header pl-3 pr-1 py-0 text-truncate effectHeader cardHeaderFont " + (ingredientCount ?  "effectHeader": "zeroCount")}>
+                        <span className="badge badge-dark p-3 mb-3">{ingredientCount}</span>
 
                         <div className="h5 card-title font-weight-bolder mr-2 mb-3 text-right">
                             {this.props.effect.effectName}
