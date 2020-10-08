@@ -5,7 +5,7 @@ import { deleteEffect } from '../util'
 class EffectEdit extends Component {
     state = {
         modifyEffect: {
-            effectName: ''
+            name: ''
         },
         dbError: false,
         dbErrorMessage: '',
@@ -18,7 +18,7 @@ class EffectEdit extends Component {
     componentDidMount() {
         this.setState({
             modifyEffect: {
-                effectName: this.props.effect.name,
+                name: this.props.effect.name,
             }
         });
     };
@@ -34,7 +34,7 @@ class EffectEdit extends Component {
     submitEffect = (event) => {
         event.preventDefault();
         const modifyEffect = {
-            effectName: this.state.modifyEffect.effectName,
+            name: this.state.modifyEffect.name,
         };
         updateEffect(this.props.effectId, modifyEffect)
             .then(updatedEffect => {
@@ -43,13 +43,13 @@ class EffectEdit extends Component {
                     console.log("errors detected")
                     this.setState({
                         dbError: true,
-                        dbErrorMessage: updatedEffect.errors.effectName.message
+                        dbErrorMessage: updatedEffect.errors.name.message
                     });
                 } else {
                     this.props.updateEffects(updatedEffect.effect);
                     this.setState({
                         modifyEffect: {
-                            effectName: '',
+                            name: '',
                         }
                     });
                     this.props.toggleEffectEdit();
@@ -91,7 +91,7 @@ class EffectEdit extends Component {
             <div className="bg-dark text-white p-3">
                 <form onSubmit={this.submitEffect}>
                     {this.state.effectDeleted
-                        ? <div className="text-danger">{this.state.deletedEffect.effectName} has been deleted</div>
+                        ? <div className="text-danger">{this.state.deletedEffect.name} has been deleted</div>
                         :
                         <div className="form-group">
                             <label htmlFor={"editEffectName" + this.props.index}>Effect Name</label>
@@ -99,10 +99,10 @@ class EffectEdit extends Component {
                                 type="text"
                                 className="form-control"
                                 id={"editEffectName" + this.props.index}
-                                name="effectName"
+                                name="name"
                                 placeholder={this.props.effect.name}
                                 onChange={this.handleChange}
-                                value={this.state.modifyEffect.effectName}
+                                value={this.state.modifyEffect.name}
                                 required
                             />
                             {/* Database Error Message*/}

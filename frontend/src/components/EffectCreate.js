@@ -4,7 +4,7 @@ import { createEffect } from '../util'
 class EffectCreate extends Component {
     state = {
         newEffect: {
-            effectName: ''
+            name: ''
         },
         dbError: false,
         dbErrorMessage: '',
@@ -22,7 +22,7 @@ class EffectCreate extends Component {
     submitEffect = (event) => {
         event.preventDefault();
         const newEffect = {
-            effectName: this.state.newEffect.effectName,
+            name: this.state.newEffect.name,
         };
         createEffect(newEffect)
             .then(newEffect => {
@@ -31,13 +31,13 @@ class EffectCreate extends Component {
                     console.log("errors detected")
                     this.setState({
                         dbError: true,
-                        dbErrorMessage: newEffect.errors.effectName.message
+                        dbErrorMessage: newEffect.errors.name.message
                     });
                 } else {
                     this.props.addToEffects(newEffect.effect);
                     this.setState({
                         newEffect: {
-                            effectName: '',
+                            name: '',
                         }
                     });
                     this.props.toggleEffectCreate();
@@ -54,15 +54,15 @@ class EffectCreate extends Component {
             <div className="bg-dark m-3 p-2">
                 <form onSubmit={this.submitEffect} className="text-white m-2">
                     <div className="form-group">
-                        <label htmlFor="effectName">Effect Name</label>
+                        <label htmlFor="createEffectName">Effect Name</label>
                         <input
                             type="text"
                             className="form-control"
-                            id="effectName"
-                            name="effectName"
+                            id="createEffectName"
+                            name="name"
                             placeholder="New Effect Name"
                             onChange={this.handleChange}
-                            value={this.state.newEffect.effectName}
+                            value={this.state.newEffect.name}
                             required
                         />
                         {/* Database Error Message*/}

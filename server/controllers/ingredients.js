@@ -30,7 +30,7 @@ const ingredientController = {
 
     },
     updatebyName: function (req, res) {
-        Ingredient.findOneAndUpdate({ ingredientName: req.params.ingredientName }, req.body, { new: true, useFindAndModify: false, runValidators: true, context: 'query' })
+        Ingredient.findOneAndUpdate({ name: req.params.ingredientName }, req.body, { new: true, useFindAndModify: false, runValidators: true, context: 'query' })
             .then(ingredient => {
                 res.json({ ingredient: ingredient });
             })

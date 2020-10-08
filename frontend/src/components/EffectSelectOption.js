@@ -9,7 +9,7 @@ class EffectSelectOption extends Component {
                 value={this.props.effect._id}
                 disabled={this.props.disabled}
             >
-                {this.props.effect.effectName}
+                {this.props.effect.name}
             </option>
 
         )

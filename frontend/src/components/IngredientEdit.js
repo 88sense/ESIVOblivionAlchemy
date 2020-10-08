@@ -6,7 +6,7 @@ import EffectSelectControl from './EffectSelectControl'
 class IngredientEdit extends Component {
     state = {
         modifyIngredient: {
-            ingredientName: '',
+            name: '',
             updateEffect01: '',
             updateEffect02: '',
             updateEffect03: '',
@@ -23,7 +23,7 @@ class IngredientEdit extends Component {
     componentDidMount() {
         this.setState({
             modifyIngredient: {
-                ingredientName: this.props.ingredient.ingredientName,
+                name: this.props.ingredient.name,
                 updateEffect01: (!this.props.ingredient.effect01 ? '' : this.props.ingredient.effect01),
                 updateEffect02: (!this.props.ingredient.effect02 ? '' : this.props.ingredient.effect02),
                 updateEffect03: (!this.props.ingredient.effect03 ? '' : this.props.ingredient.effect03),
@@ -44,7 +44,7 @@ class IngredientEdit extends Component {
     submitIngredient = (event) => {
         event.preventDefault();
         const modifyIngredient = {
-            ingredientName: this.state.modifyIngredient.ingredientName,
+            name: this.state.modifyIngredient.name,
             effect01: (!this.state.modifyIngredient.updateEffect01) ? null : this.state.modifyIngredient.updateEffect01,
             effect02: (!this.state.modifyIngredient.updateEffect02) ? null : this.state.modifyIngredient.updateEffect02,
             effect03: (!this.state.modifyIngredient.updateEffect03) ? null : this.state.modifyIngredient.updateEffect03,
@@ -57,7 +57,7 @@ class IngredientEdit extends Component {
                     console.log("errors detected")
                     this.setState({
                         dbError: true,
-                        dbErrorMessage: updatedIngredient.errors.ingredientName.message
+                        dbErrorMessage: updatedIngredient.errors.name.message
                     });
                 } else {
                     this.props.updateIngredients(updatedIngredient.ingredient);
@@ -101,19 +101,19 @@ class IngredientEdit extends Component {
             <div className="bg-dark text-white p-2">
                 <form onSubmit={this.submitIngredient} className="m-2">
                     {this.state.ingredientDeleted
-                        ? <div className="text-danger">{this.state.deletedIngredient.ingredientName} has been deleted</div>
+                        ? <div className="text-danger">{this.state.deletedIngredient.name} has been deleted</div>
                         :
                         <div>
                             <div className="form-group">
-                                <label htmlFor="ingredientName">Ingredient Name</label>
+                                <label htmlFor={"editIngredientName" + this.props.index}>Ingredient Name</label>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    id="editIngredientName"
-                                    name="ingredientName"
-                                    placeholder={this.props.ingredient.ingredientName}
+                                    id={"editIngredientName" + this.props.index}
+                                    name="name"
+                                    placeholder={this.props.ingredient.name}
                                     onChange={this.handleChange}
-                                    value={this.state.modifyIngredient.ingredientName}
+                                    value={this.state.modifyIngredient.name}
                                     required
                                 />
                                 {/* Database Error Message */}

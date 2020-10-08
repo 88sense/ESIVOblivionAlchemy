@@ -2,7 +2,7 @@ const mongoose = require("../db/connection.js")
 const uniqueValidator = require('mongoose-unique-validator');
 
 const Ingredient = mongoose.Schema({
-    ingredientName: {
+    name: {
         type: String,
         required: [true, 'Please enter ingredient name'],
         unique: true,

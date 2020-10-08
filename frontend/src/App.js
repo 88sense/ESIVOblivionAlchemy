@@ -56,24 +56,15 @@ class App extends Component {
     effectIndex()
       .then(effectsResults => {
         console.log(effectsResults)
-        effectsResults.effects.sort((a, b) => {
-          if (a.effectName.toLowerCase() <
-            b.effectName.toLowerCase()
-          ) {
-            return -1;
-          } else {
-            return 1;
-          }
-        })
+        let effects = this.sortByName(effectsResults.effects)
         ingredientIndex()
           .then(ingredientsResults => {
             console.log(ingredientsResults)
             let ingredients = this.sortByName(ingredientsResults.ingredients)
-            console.log(ingredients)
             this.updateEffectCodex(effectsResults.effects, ingredientsResults.ingredients)
             this.setState({
               ingredients: ingredients,
-              effects: effectsResults.effects,
+              effects: effects,
             })
           })
       })
@@ -85,8 +76,8 @@ class App extends Component {
 
   sortByName = (itemList) => {
     itemList.sort((a, b) => {
-      if (a.ingredientName.toLowerCase() <
-        b.ingredientName.toLowerCase()
+      if (a.name.toLowerCase() <
+        b.name.toLowerCase()
       ) {
         return -1;
       } else {
@@ -115,7 +106,7 @@ class App extends Component {
 
     effects.forEach(effect => {
       effectCodex[effect._id] = {
-        name: effect.effectName,
+        name: effect.name,
         ingredientCount: 0,
         relatedIngredients: {}
       }
@@ -123,19 +114,19 @@ class App extends Component {
     ingredients.forEach(ingredient => {
       if (ingredient.count > 0) { activeIngredientCount++ }
       if (effectCodex[ingredient.effect01]) {
-        effectCodex[ingredient.effect01].relatedIngredients[ingredient.ingredientName] =
+        effectCodex[ingredient.effect01].relatedIngredients[ingredient.name] =
           ingredient.count;
       }
       if (effectCodex[ingredient.effect02]) {
-        effectCodex[ingredient.effect02].relatedIngredients[ingredient.ingredientName] =
+        effectCodex[ingredient.effect02].relatedIngredients[ingredient.name] =
           ingredient.count;
       }
       if (effectCodex[ingredient.effect03]) {
-        effectCodex[ingredient.effect03].relatedIngredients[ingredient.ingredientName] =
+        effectCodex[ingredient.effect03].relatedIngredients[ingredient.name] =
           ingredient.count;
       }
       if (effectCodex[ingredient.effect04]) {
-        effectCodex[ingredient.effect04].relatedIngredients[ingredient.ingredientName] =
+        effectCodex[ingredient.effect04].relatedIngredients[ingredient.name] =
           ingredient.count;
       }
     })
@@ -154,12 +145,12 @@ class App extends Component {
         effectCodex[effectId].ingredientCount = ingredientCounter;
       }
     })
-    console.log(activeEffectCount)
     this.setState({
       effectCodex: effectCodex,
       activeIngredientCount: activeIngredientCount,
       activeEffectCount: activeEffectCount
     })
+    console.log("effectCodex:")
     console.log(effectCodex);
   }
 
@@ -189,7 +180,7 @@ class App extends Component {
 
   addToEffects = (newEffect) => {
     let effectCodex = this.state.effectCodex;
-    effectCodex[newEffect._id] = { name: newEffect.effectName, relatedIngredients: {} }
+    effectCodex[newEffect._id] = { name: newEffect.name, relatedIngredients: {} }
     this.setState({
       effects: [newEffect, ...this.state.effects],
       effectCodex: effectCodex

@@ -5,7 +5,7 @@ import EffectSelectControl from './EffectSelectControl'
 class IngredientCreate extends Component {
     state = {
         newIngredient: {
-            ingredientName: '',
+            name: '',
             filterEffect01: '',
             filterEffect02: '',
             filterEffect03: '',
@@ -48,7 +48,7 @@ class IngredientCreate extends Component {
     submitIngredient = (event) => {
         event.preventDefault();
         const newIngredient = {
-            ingredientName: this.state.newIngredient.ingredientName,
+            name: this.state.newIngredient.name,
             effect01: (!this.state.newIngredient.addEffect01) ? null : this.state.newIngredient.addEffect01,
             effect02: (!this.state.newIngredient.addEffect02) ? null : this.state.newIngredient.addEffect02,
             effect03: (!this.state.newIngredient.addEffect03) ? null : this.state.newIngredient.addEffect03,
@@ -62,13 +62,13 @@ class IngredientCreate extends Component {
                     console.log("errors detected")
                     this.setState({
                         dbError: true,
-                        dbErrorMessage: newIngredient.errors.ingredientName.message
+                        dbErrorMessage: newIngredient.errors.name.message
                     });
                 } else {
                     this.props.addToIngredients(newIngredient.ingredient);
                     this.setState({
                         newIngredient: {
-                            ingredientName: '',
+                            name: '',
                             filterEffect01: '',
                             filterEffect02: '',
                             filterEffect03: '',
@@ -93,14 +93,14 @@ class IngredientCreate extends Component {
 
                     <div className="d-flex flex-row justify-content-between my-2">
                         <div className="flex-grow-1 mr-4">
-                            <label htmlFor="ingredientName">Ingredient Name</label>
+                            <label htmlFor="createIngredientName">Ingredient Name</label>
                             <input type="text"
                                 className="form-control"
-                                id="ingredientName"
-                                name="ingredientName"
+                                id="createIngredientName"
+                                name="name"
                                 placeholder="New Ingredient Name"
                                 onChange={this.handleChange}
-                                value={this.state.newIngredient.ingredientName}
+                                value={this.state.newIngredient.name}
                                 required
                             />
                             {/* Database Error Message */}
