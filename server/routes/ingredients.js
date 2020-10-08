@@ -14,6 +14,8 @@ router.get('/:ingredientId', ingredients.read);
 
 // PUT (Update) a single Ingredient 
 router.put('/:ingredientId', ingredients.update);
+router.put('/name/:ingredientName', ingredients.updatebyName);
+
 
 // Delete a single Ingredient 
 router.delete('/:ingredientId', ingredients.delete);

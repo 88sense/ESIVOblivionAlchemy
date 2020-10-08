@@ -25,28 +25,6 @@ class Navbar extends Component {
                         <li className="nav-item">
                             <div className="btn-group mt-3 mb-2 my-md-0 mx-0 mr-md-2" role="group">
                                 <button type="button"
-                                    className="btn btn-dark btn-outline-secondary border-right-0 py-2 px-3 text-white "
-                                    onClick={this.props.toggleIngredientList}
-                                >
-                                    Ingredients
-                                    <span className="sr-only">Ingredient Count</span>
-                                    <span className="badge badge-secondary ml-3 p-2">{this.props.ingredientsTotal}</span>
-                                </button>
-
-                                <button type="button"
-                                    className="btn btn-sm btn-dark btn-outline-secondary p-2 text-success"
-                                    onClick={this.props.toggleIngredientCreate}
-                                >
-                                    <svg width="2em" height="2em" viewBox="0 0 16 16" className="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fillRule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </li>
-
-                        <li className="nav-item">
-                            <div className="btn-group mb-2 my-md-0 mx-0 mr-md-2" role="group">
-                                <button type="button"
                                     className="btn btn-dark btn-outline-secondary border-right-0 py-2 px-3 text-white"
                                     onClick={this.props.toggleEffectList}
                                 >
@@ -58,6 +36,28 @@ class Navbar extends Component {
                                 <button type="button"
                                     className="btn btn-sm btn-dark btn-outline-secondary p-2 text-success"
                                     onClick={this.props.toggleEffectCreate}
+                                >
+                                    <svg width="2em" height="2em" viewBox="0 0 16 16" className="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fillRule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </li>
+
+                        <li className="nav-item">
+                            <div className="btn-group mb-2 my-md-0 mx-0 mr-md-2" role="group">
+                                <button type="button"
+                                    className="btn btn-dark btn-outline-secondary border-right-0 py-2 px-3 text-white "
+                                    onClick={this.props.toggleIngredientList}
+                                >
+                                    Ingredients
+                                    <span className="sr-only">Ingredient Count</span>
+                                    <span className="badge badge-secondary ml-3 p-2">{this.props.ingredientsTotal}</span>
+                                </button>
+
+                                <button type="button"
+                                    className="btn btn-sm btn-dark btn-outline-secondary p-2 text-success"
+                                    onClick={this.props.toggleIngredientCreate}
                                 >
                                     <svg width="2em" height="2em" viewBox="0 0 16 16" className="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path fillRule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />

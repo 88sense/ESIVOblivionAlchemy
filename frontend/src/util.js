@@ -16,6 +16,11 @@ export function updateIngredient(ingredientId, ingredient) {
         .then(response => response.data)
 }
 
+export function updateIngredientByName(ingredientName, ingredient) {
+    return axios.put(`/api/v1/ingredients/name/${ingredientName}/`, ingredient)
+        .then(response => response.data)
+}
+
 export function deleteIngredient(ingredientId) {
     return axios.delete(`api/v1/ingredients/${ingredientId}/`)
         .then(response => response.data)

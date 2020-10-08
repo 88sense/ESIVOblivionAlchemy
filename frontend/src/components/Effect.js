@@ -12,28 +12,32 @@ class Effect extends Component {
     }
 
     render() {
-
         // Calculate sum of Ingredients related to Effect from values in relatedIngredients object
         let ingredientTotal = 0;
         let ingredientTotalsArray = [];
-        const reducer = (accumulator, currentValue) => accumulator + currentValue;
         if (this.props.effectCodex[this.props.effect._id]) {
             ingredientTotalsArray = Object.values(this.props.effectCodex[this.props.effect._id].relatedIngredients)
         }
         if (ingredientTotalsArray.length) {
-            ingredientTotal = ingredientTotalsArray.reduce(reducer);
+            let initialValue = 0
+            ingredientTotal = ingredientTotalsArray.reduce(function (accumulator, currentValue) {
+                // If ingredient count is greater than 0 add 1 to ingredient total
+                return accumulator + (currentValue ? 1 : 0)
+            }, initialValue)
         }
+        let headerColor = "effectHeader";
+        if (ingredientTotal === 0) { headerColor = "zeroCount"}
 
         return (
             <div className="col my-4">
-                <div className="card h-100 border-0 effectHeader shadow-lg">
-                    <div className="card-header pl-3 pr-1 py-0 text-truncate cardHeader effectHeader">
+                <div className="card h-100 border-0 bg-transparent">
+                    <div className={"card-header pl-3 pr-1 py-0 text-truncate effectHeader cardHeaderFont " + headerColor}>
                         <span className="badge badge-dark p-3 mb-3">{ingredientTotal}</span>
 
                         <div className="h5 card-title font-weight-bolder mr-2 mb-3 text-right">
                             {this.props.effect.effectName}
                         </div>
-                        
+
                         <div className="d-flex justify-content-end">
 
                             {this.state.showEffectEdit
@@ -76,7 +80,7 @@ class Effect extends Component {
                         </div>
 
                     </div>
-                    <div className="card card-body p-0 bg-secondary">
+                    <div className="card card-body border-0 bg-transparent p-0">
                         {this.state.showEffectEdit
                             ?
                             <EffectEdit
@@ -93,7 +97,7 @@ class Effect extends Component {
                             < EffectRelatedIngredientList
                                 effectCodex={this.props.effectCodex}
                                 effect={this.props.effect}
-
+                                updateIngredients={this.props.updateIngredients}
                             />
                         </div>
                     </div>

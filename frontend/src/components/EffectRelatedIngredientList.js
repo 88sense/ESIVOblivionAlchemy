@@ -12,7 +12,7 @@ class EffectRelatedIngredientList extends Component {
                 index={index}
                 relatedIngredient={ingredient}
                 relatedIngredientCount={this.props.effectCodex[this.props.effect._id].relatedIngredients[ingredient]}
-
+                updateIngredients={this.props.updateIngredients}
             />
         })
 

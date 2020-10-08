@@ -20,6 +20,7 @@ class EffectList extends Component {
                 effectCodex={this.props.effectCodex}
                 updateEffects={this.props.updateEffects}
                 deleteFromEffects={this.props.deleteFromEffects}
+                updateIngredients={this.props.updateIngredients}
             />
         })
 

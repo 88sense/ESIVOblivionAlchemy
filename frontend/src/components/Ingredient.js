@@ -39,6 +39,8 @@ class Ingredient extends Component {
 
 
     render() {
+        let headerColor = "ingredientHeader";
+        if (this.props.ingredient.count === 0) { headerColor = "zeroCount"}
         let effectCodex = this.props.effectCodex;
         let ingredientEffectName01 = '';
         let ingredientEffectName02 = '';
@@ -64,9 +66,9 @@ class Ingredient extends Component {
 
         return (
             <div className="col my-4">
-                <div className="card h-100 border-0 shadow-lg">
-                    <div className="card-header pl-3 pt-3 pr-1 pb-0 ingredientHeader">
-                        <div className="h5 text-truncate card-title font-weight-bolder cardHeader mb-4">
+                <div className="card h-100 border-0">
+                    <div className={"card-header pl-3 pt-3 pr-1 pb-0 " + headerColor}>
+                        <div className="h5 text-truncate card-title font-weight-bolder cardHeaderFont mb-4">
                             {this.props.ingredient.ingredientName}
                         </div>
                         <div className="d-flex justify-content-between">

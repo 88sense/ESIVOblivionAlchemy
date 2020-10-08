@@ -20,8 +20,8 @@ class App extends Component {
         relatedIngredients: {}
       }
     },
-    showIngredientList: true,
-    showEffectList: false,
+    showEffectList: true,
+    showIngredientList: false,
     searchText: '',
     selectedEffects: {
       filterEffect01: '',
@@ -97,22 +97,28 @@ class App extends Component {
     ingredients.forEach(ingredient => {
       if (effectCodex[ingredient.effect01]) {
         effectCodex[ingredient.effect01].relatedIngredients[ingredient.ingredientName] =
-          (effectCodex[ingredient.effect01].relatedIngredients[ingredient.ingredientName] + 1) || 1;
+          ingredient.count;
+        // (effectCodex[ingredient.effect01].relatedIngredients[ingredient.ingredientName] + 1) || 1;
       }
       if (effectCodex[ingredient.effect02]) {
         effectCodex[ingredient.effect02].relatedIngredients[ingredient.ingredientName] =
-          (effectCodex[ingredient.effect02].relatedIngredients[ingredient.ingredientName] + 1) || 1;
+          ingredient.count;
+        // (effectCodex[ingredient.effect02].relatedIngredients[ingredient.ingredientName] + 1) || 1;
       }
       if (effectCodex[ingredient.effect03]) {
         effectCodex[ingredient.effect03].relatedIngredients[ingredient.ingredientName] =
-          (effectCodex[ingredient.effect03].relatedIngredients[ingredient.ingredientName] + 1) || 1;
+          ingredient.count;
+        // (effectCodex[ingredient.effect03].relatedIngredients[ingredient.ingredientName] + 1) || 1;
       }
       if (effectCodex[ingredient.effect04]) {
         effectCodex[ingredient.effect04].relatedIngredients[ingredient.ingredientName] =
-          (effectCodex[ingredient.effect04].relatedIngredients[ingredient.ingredientName] + 1) || 1;
+          ingredient.count;
+
+        // (effectCodex[ingredient.effect04].relatedIngredients[ingredient.ingredientName] + 1) || 1;
       }
     })
     this.setState({ effectCodex: effectCodex })
+    console.log(effectCodex);
   }
 
   addToIngredients = (newIngredient) => {
@@ -261,6 +267,20 @@ class App extends Component {
         {/* Filtered Results */}
         <section id="resultList" className="mt-5">
           <div>
+            {/* Show List of Effects? */}
+            {this.state.showEffectList
+              ?
+              <EffectList
+                effects={this.state.effects}
+                effectCodex={this.state.effectCodex}
+                updateEffects={this.updateEffects}
+                deleteFromEffects={this.deleteFromEffects}
+                searchText={this.state.searchText}
+                updateIngredients={this.updateIngredients}
+              />
+              : null
+            }
+
             {/* Show List of Ingredients? */}
             {this.state.showIngredientList
               ?
@@ -276,18 +296,6 @@ class App extends Component {
               : null
             }
 
-            {/* Show List of Effects? */}
-            {this.state.showEffectList
-              ?
-              <EffectList
-                effects={this.state.effects}
-                effectCodex={this.state.effectCodex}
-                updateEffects={this.updateEffects}
-                deleteFromEffects={this.deleteFromEffects}
-                searchText={this.state.searchText}
-              />
-              : null
-            }
 
             {/* Photo credit */}
             {/* <span className="text-light">Photo by <a href="https://unsplash.com/@mbriney?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Matt Briney</a> on <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span> */}
