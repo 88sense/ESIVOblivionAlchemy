@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 class Navbar extends Component {
     render() {
         return (
-            <nav className="navbar navbar-expand-md d-flex justify-content-sm-end navbar-dark bg-dark px-4">
+            <nav className="navbar navbar-expand-md d-flex justify-content-sm-end navbar-dark bg-dark pl-3 pr-2">
 
                 <button className="navbar-toggler mr-auto" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -30,7 +30,7 @@ class Navbar extends Component {
                                 >
                                     Effects
                                     <span className="sr-only">Effect Count</span>
-                                    <span className="badge badge-secondary ml-3 p-2 ">{this.props.activeEffectCount}</span>
+                                    <span className="badge badge-secondary ml-2 p-2 ">{this.props.activeEffectCount}</span>
                                 </button>
 
                                 <button type="button"
@@ -47,12 +47,12 @@ class Navbar extends Component {
                         <li className="nav-item">
                             <div className="btn-group mb-2 my-md-0 mx-0 mr-md-2" role="group">
                                 <button type="button"
-                                    className="btn btn-dark btn-outline-secondary border-right-0 py-2 px-3 text-white "
+                                    className="btn btn-dark btn-outline-secondary border-right-0 py-2 px-3 text-white"
                                     onClick={this.props.toggleIngredientList}
                                 >
                                     Ingredients
                                     <span className="sr-only">Ingredient Count</span>
-                                    <span className="badge badge-secondary ml-3 p-2">{this.props.activeIngredientCount}</span>
+                                    <span className="badge badge-secondary ml-2 p-2">{this.props.activeIngredientCount}</span>
                                 </button>
 
                                 <button type="button"
@@ -74,8 +74,10 @@ class Navbar extends Component {
                                     : "btn btn-secondary px-3 py-2"}
                                 onClick={this.props.toggleFilters}
                             >
-                                Show Filters
-                                </button>
+                                {this.props.showFilters
+                                    ? "Hide Filters"
+                                    : "Show Filters"}
+                            </button>
                         </li>
                     </ul>
                 </div>

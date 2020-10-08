@@ -36,18 +36,6 @@ class App extends Component {
     showFilters: true
   };
 
-
-  toggleEffectCreate = () => {
-    this.setState(state => ({ showEffectCreate: !state.showEffectCreate }))
-  };
-  toggleIngredientCreate = () => {
-    this.setState(state => ({ showIngredientCreate: !state.showIngredientCreate }))
-  };
-
-  toggleFilters = () => {
-    this.setState(state => ({ showFilters: !state.showFilters }))
-  };
-
   componentDidMount() {
     this.fetchData()
   };
@@ -74,6 +62,17 @@ class App extends Component {
       })
   };
 
+  sortResultsByName = () => {
+    let ingredients = this.state.ingredients;
+    this.sortByName(ingredients)
+    let effects = this.state.effects;
+    this.sortByName(effects);
+    this.setState({
+      effects: effects,
+      ingredients: ingredients
+    })
+  }
+
   sortByName = (itemList) => {
     itemList.sort((a, b) => {
       if (a.name.toLowerCase() <
@@ -87,16 +86,41 @@ class App extends Component {
     return itemList
   }
 
-  sortIngredientsByCount = (itemList) => {
-    itemList.sort((a, b) => {
-      if (a.count < b.count
+  sortResultsByCount = () => {
+    let ingredients = this.state.ingredients;
+    this.sortIngredientsByCount(ingredients)
+    let effects = this.state.effects;
+    this.sortEffectsByCount(effects);
+    this.setState({
+      effects: effects,
+      ingredients: ingredients
+    })
+  }
+
+
+  sortIngredientsByCount = (ingredients) => {
+    ingredients.sort((a, b) => {
+      if (a.count > b.count
       ) {
         return -1;
       } else {
         return 1;
       }
     })
-    return itemList
+    return ingredients
+  }
+
+  sortEffectsByCount = (effects) => {
+    let effectCodex = this.state.effectCodex;
+    effects.sort((a, b) => {
+      if (effectCodex[a._id].ingredientCount > effectCodex[b._id].ingredientCount
+      ) {
+        return -1;
+      } else {
+        return 1;
+      }
+    })
+    return effects
   }
 
   updateEffectCodex = (effects, ingredients) => {
@@ -217,6 +241,16 @@ class App extends Component {
       showEffectList: true
     }))
   }
+  toggleEffectCreate = () => {
+    this.setState(state => ({ showEffectCreate: !state.showEffectCreate }))
+  };
+  toggleIngredientCreate = () => {
+    this.setState(state => ({ showIngredientCreate: !state.showIngredientCreate }))
+  };
+
+  toggleFilters = () => {
+    this.setState(state => ({ showFilters: !state.showFilters }))
+  };
 
   handleSearchText = (event) => {
     this.setState({ searchText: event.target.value })
@@ -283,14 +317,14 @@ class App extends Component {
           {/* Text Search and Effect Filters */}
           {this.state.showFilters
             ?
-            <div className="bg-light pt-4 pb-2 px-4">
+            <div className="bg-light py-2 px-4">
               <SearchFilters
                 effects={this.state.effects}
-                addToEffects={this.addToEffects}
-                addToIngredients={this.addToIngredients}
                 handleSearchText={this.handleSearchText}
                 handleChange={this.handleEffectSelect}
                 selectedEffects={this.state.selectedEffects}
+                sortResultsByName={this.sortResultsByName}
+                sortResultsByCount={this.sortResultsByCount}
               />
             </div>
             : null

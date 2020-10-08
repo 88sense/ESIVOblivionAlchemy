@@ -5,18 +5,19 @@ class EffectList extends Component {
 
     render() {
         const searchText = this.props.searchText;
-        const effectsIndex = Object.keys(this.props.effectCodex)
-        const effectComponents = effectsIndex.map((effectKey, index) => {
+        // const effectsIndex = Object.keys(this.props.effectCodex)
+        // const effectComponents = effectsIndex.map((effect._id, index) => {
+        const effectComponents = this.props.effects.map((effect, index) => {
             // Text search filter
-            if (this.props.effectCodex[effectKey].name.toLowerCase().indexOf(searchText) === -1) {
+            if (this.props.effectCodex[effect._id].name.toLowerCase().indexOf(searchText) === -1) {
                 return null;
             }
 
             return <Effect
-                key={effectKey}
+                key={effect._id}
                 index={index}
-                effectId={effectKey}
-                effect={this.props.effectCodex[effectKey]}
+                effectId={effect._id}
+                effect={this.props.effectCodex[effect._id]}
                 updateEffects={this.props.updateEffects}
                 deleteFromEffects={this.props.deleteFromEffects}
                 updateIngredients={this.props.updateIngredients}
