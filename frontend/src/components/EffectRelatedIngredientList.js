@@ -5,13 +5,13 @@ class EffectRelatedIngredientList extends Component {
 
     render() {
 
-        const relatedIngredients = Object.keys(this.props.effectCodex[this.props.effect._id].relatedIngredients)
+        const relatedIngredients = Object.keys(this.props.effect.relatedIngredients)
         const relatedIngredientsComponents = relatedIngredients.map((ingredient, index) => {
             return <EffectRelatedIngredientListItem
                 key={ingredient}
                 index={index}
                 relatedIngredient={ingredient}
-                relatedIngredientCount={this.props.effectCodex[this.props.effect._id].relatedIngredients[ingredient]}
+                relatedIngredientCount={this.props.effect.relatedIngredients[ingredient]}
                 updateIngredients={this.props.updateIngredients}
             />
         })

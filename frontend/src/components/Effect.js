@@ -13,16 +13,14 @@ class Effect extends Component {
 
     render() {
 
-        const ingredientCount = this.props.effectCodex[this.props.effect._id].ingredientCount
-
         return (
             <div className="col my-4">
                 <div className="card h-100 border-0 bg-transparent">
-                    <div className={"card-header pl-3 pr-1 py-0 text-truncate effectHeader cardHeaderFont " + (ingredientCount ?  "effectHeader": "zeroCount")}>
-                        <span className="badge badge-dark p-3 mb-3">{ingredientCount}</span>
+                    <div className={"card-header pl-3 pr-1 py-0 text-truncate effectHeader cardHeaderFont " + (this.props.effect.ingredientCount ?  "effectHeader": "zeroCount")}>
+                        <span className="badge badge-dark p-3 mb-3">{this.props.effect.ingredientCount}</span>
 
                         <div className="h5 card-title font-weight-bolder mr-2 mb-3 text-right">
-                            {this.props.effect.effectName}
+                            {this.props.effect.name}
                         </div>
 
                         <div className="d-flex justify-content-end">
@@ -71,6 +69,7 @@ class Effect extends Component {
                         {this.state.showEffectEdit
                             ?
                             <EffectEdit
+                                effectId={this.props.effectId}
                                 effect={this.props.effect}
                                 index={this.props.index}
                                 updateEffects={this.props.updateEffects}
@@ -82,7 +81,6 @@ class Effect extends Component {
 
                         <div className="collapse" id={"relatedIngredientsList" + this.props.index}>
                             < EffectRelatedIngredientList
-                                effectCodex={this.props.effectCodex}
                                 effect={this.props.effect}
                                 updateIngredients={this.props.updateIngredients}
                             />

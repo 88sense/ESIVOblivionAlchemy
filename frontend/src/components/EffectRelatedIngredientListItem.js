@@ -6,8 +6,6 @@ class EffectRelatedIngredientListItem extends Component {
     decreaseCount = () => {
         if (this.props.relatedIngredientCount > 0) {
             let subtractCount = { "count": this.props.relatedIngredientCount - 1 }
-            console.log (subtractCount)
-            console.log(this.props.relatedIngredient)
             updateIngredientByName(this.props.relatedIngredient, subtractCount)
             .then(updatedIngredient => {
                 console.log(updatedIngredient)

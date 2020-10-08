@@ -18,7 +18,7 @@ class EffectEdit extends Component {
     componentDidMount() {
         this.setState({
             modifyEffect: {
-                effectName: this.props.effect.effectName,
+                effectName: this.props.effect.name,
             }
         });
     };
@@ -36,7 +36,7 @@ class EffectEdit extends Component {
         const modifyEffect = {
             effectName: this.state.modifyEffect.effectName,
         };
-        updateEffect(this.props.effect._id, modifyEffect)
+        updateEffect(this.props.effectId, modifyEffect)
             .then(updatedEffect => {
                 console.log(updatedEffect);
                 if (updatedEffect.errors) {
@@ -62,7 +62,7 @@ class EffectEdit extends Component {
 
     purgeEffect = (event) => {
         event.preventDefault();
-        deleteEffect(this.props.effect._id)
+        deleteEffect(this.props.effectId)
             .then(deletedEffect => {
                 console.log(deletedEffect)
                 if (deletedEffect.errors) {
@@ -100,7 +100,7 @@ class EffectEdit extends Component {
                                 className="form-control"
                                 id={"editEffectName" + this.props.index}
                                 name="effectName"
-                                placeholder={this.props.effect.effectName}
+                                placeholder={this.props.effect.name}
                                 onChange={this.handleChange}
                                 value={this.state.modifyEffect.effectName}
                                 required

@@ -68,19 +68,11 @@ class App extends Component {
         ingredientIndex()
           .then(ingredientsResults => {
             console.log(ingredientsResults)
-            ingredientsResults.ingredients.sort((a, b) => {
-              if (a.ingredientName.toLowerCase() <
-                b.ingredientName.toLowerCase()
-              ) {
-                return -1;
-              } else {
-                return 1;
-              }
-            })
-
+            let ingredients = this.sortByName(ingredientsResults.ingredients)
+            console.log(ingredients)
             this.updateEffectCodex(effectsResults.effects, ingredientsResults.ingredients)
             this.setState({
-              ingredients: ingredientsResults.ingredients,
+              ingredients: ingredients,
               effects: effectsResults.effects,
             })
           })
@@ -90,6 +82,31 @@ class App extends Component {
         this.setState({ error: err.message })
       })
   };
+
+  sortByName = (itemList) => {
+    itemList.sort((a, b) => {
+      if (a.ingredientName.toLowerCase() <
+        b.ingredientName.toLowerCase()
+      ) {
+        return -1;
+      } else {
+        return 1;
+      }
+    })
+    return itemList
+  }
+
+  sortIngredientsByCount = (itemList) => {
+    itemList.sort((a, b) => {
+      if (a.count < b.count
+      ) {
+        return -1;
+      } else {
+        return 1;
+      }
+    })
+    return itemList
+  }
 
   updateEffectCodex = (effects, ingredients) => {
     let effectCodex = {};
