@@ -57,6 +57,13 @@ _________________________*/
 
 /* Media Queries
 _________________________*/
+
+@media (max-width: 768px) {
+    .hideOnSmallScreens{
+      display: none;
+    }
+  } 
+
 @media (min-width: 768px) {
   #alchemy {
     margin: 4rem 0 0 0;

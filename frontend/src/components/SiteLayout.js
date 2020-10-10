@@ -68,8 +68,13 @@ class SiteLayout extends Component {
                             showIngredientList={this.props.showIngredientList}
                             effectCodex={this.props.effectCodex}
                             textSearch={this.props.textSearch}
+                            handleTextSearch={this.props.handleTextSearch}
                             selectedEffects={this.props.selectedEffects}
+                            handleEffectSelect={this.props.handleEffectSelect}
+                            sortResultsByName={this.props.sortResultsByName}
+                            sortResultsByCount={this.props.sortResultsByCount}
                             showFilters={this.props.showFilters}
+                            toggleFilters={this.props.toggleFilters}
                         />
                     </section>
                 </main>

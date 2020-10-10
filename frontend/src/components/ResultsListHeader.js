@@ -6,7 +6,7 @@ class ResultsListHeader extends Component {
     render() {
 
         return (
-            <div className="d-flex flex-column flex-md-row align-items-start align-items-md-baseline pt-3 pb-2 px-2 c7a589">
+            <div className="d-flex flex-row align-items-baseline p-2 c7a589">
 
                 {/* List Model */}
                 <h2 className="d-flex flex-row align-items-baseline mb-0 ml-3 mr-2 resultsListHeader montserrat">
@@ -17,7 +17,7 @@ class ResultsListHeader extends Component {
                 </h2>
 
                 {/* List Length */}
-                <div className="mt-2 mb-0 ml-5 mr-2 mt-md-0 ml-md-2">
+                <div className="my-0 mx-2 hideOnSmallScreens">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-chevron-double-right mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                         <path fillRule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
@@ -27,7 +27,7 @@ class ResultsListHeader extends Component {
                 </div>
 
                 {/* List Active Items - Items associated with another model */}
-                <div className="mt-2 mb-0 ml-5 mr-2 mt-md-0 ml-md-2">
+                <div className="my-0 mx-2 hideOnSmallScreens">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-chevron-double-right mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                         <path fillRule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
@@ -37,7 +37,7 @@ class ResultsListHeader extends Component {
                 </div>
 
                 {/* Number of filtered results */}
-                <div className="mt-2 mb-0 ml-5 mr-2 mt-md-0 ml-md-2">
+                <div className="my-0 mr-2">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-chevron-double-right mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                         <path fillRule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
