@@ -12,18 +12,17 @@ class EffectCreate extends Component {
     }
 
     handleChange = (event) => {
-        const inputName = event.target.name
-        const inputValue = event.target.value
-        const newEffect = { ...this.state.newEffect }
-        newEffect[inputName] = inputValue
-        this.setState({ newEffect: newEffect })
+        const inputName = event.target.name;
+        const inputValue = event.target.value;
+        const newEffect = { ...this.state.newEffect };
+        newEffect[inputName] = inputValue;
+        this.setState({ newEffect: newEffect });
     }
 
     submitEffect = (event) => {
         event.preventDefault();
-        const newEffect = {
-            name: this.state.newEffect.name,
-        };
+        const name = this.state.newEffect.name;
+        const newEffect = { name: name };
         createEffect(newEffect)
             .then(newEffect => {
                 console.log(newEffect);
@@ -51,7 +50,7 @@ class EffectCreate extends Component {
     render() {
 
         return (
-            <div className="bg-dark m-3 p-2">
+            <div className="bg-dark m-0 p-3 border-top border-white">
                 <form onSubmit={this.submitEffect} className="text-white m-2">
                     <div className="form-group">
                         <label htmlFor="createEffectName">Effect Name</label>
@@ -76,10 +75,8 @@ class EffectCreate extends Component {
                     </div>
                 </form>
             </div>
-
         )
     }
-
 }
 
 export default EffectCreate

@@ -3,32 +3,23 @@ import EffectFilters from './EffectFilters'
 
 class SearchFilters extends Component {
     state = {
-        showEffectCreate: false,
-        showIngredientCreate: false,
         sortByName: true,
         sortByCount: false
     };
 
-    toggleEffectCreate = () => {
-        this.setState(state => ({ showEffectCreate: !state.showEffectCreate }))
-    };
-    toggleIngredientCreate = () => {
-        this.setState(state => ({ showIngredientCreate: !state.showIngredientCreate }))
-    };
-
     toggleSortByName = () => {
         this.props.sortResultsByName();
-        this.setState(state => ({
+        this.setState({
             sortByName: true,
             sortByCount: false
-        }))
+        });
     };
     toggleSortByCount = () => {
         this.props.sortResultsByCount();
-        this.setState(state => ({
+        this.setState({
             sortByName: false,
             sortByCount: true
-        }))
+        });
     }
 
     render() {
@@ -51,7 +42,7 @@ class SearchFilters extends Component {
                                 className="form-control"
                                 id="textSearch"
                                 placeholder="Enter Search..."
-                                onChange={this.props.handleSearchText}
+                                onChange={this.props.handleTextSearch}
                             />
                         </div>
                     </div>
@@ -92,18 +83,21 @@ class SearchFilters extends Component {
                     </div>
                 </div>
 
+                {this.props.showIngredientList
+                    ?
+                    <div className="m-3">
+                        <EffectFilters
+                            effects={this.props.effects}
+                            handleChange={this.props.handleChange}
+                            selectedEffects={this.props.selectedEffects}
+                        />
+                    </div>
+                    : null
+                }
 
-                <div className="m-3">
-                    <EffectFilters
-                        effects={this.props.effects}
-                        handleChange={this.props.handleChange}
-                        selectedEffects={this.props.selectedEffects}
-                    />
-                </div>
             </div >
         )
     }
-
 }
 
 export default SearchFilters

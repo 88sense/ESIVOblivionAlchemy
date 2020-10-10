@@ -14,12 +14,12 @@ class Effect extends Component {
     render() {
 
         return (
-            <div className="col my-4">
+            <div className="col my-4 px-1 px-sm-2 px-md-3">
                 <div className="card h-100 border-0 bg-transparent">
-                    <div className={"card-header pl-3 pr-1 py-0 text-truncate effectHeader cardHeaderFont " + (this.props.effect.ingredientCount ?  "effectHeader": "zeroCount")}>
+                    <div className={"card-header pl-3 pr-1 py-0 text-truncate ebd5a7 montserrat " + (this.props.effect.ingredientCount ?  "ebd5a7": "zeroCount")}>
                         <span className="badge badge-dark p-3 mb-3">{this.props.effect.ingredientCount}</span>
 
-                        <div className="h5 card-title font-weight-bolder mr-2 mb-3 text-right">
+                        <div className="h5 card-title text-truncate font-weight-bolder mr-2 mb-3">
                             {this.props.effect.name}
                         </div>
 

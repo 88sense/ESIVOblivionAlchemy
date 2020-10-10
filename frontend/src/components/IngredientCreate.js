@@ -88,7 +88,7 @@ class IngredientCreate extends Component {
     render() {
 
         return (
-            <div className="bg-dark m-3 p-2">
+            <div className="bg-dark m-0 p-3 border-top border-white">
                 <form onSubmit={this.submitIngredient} className="text-white m-2">
 
                     <div className="d-flex flex-row justify-content-between my-2">

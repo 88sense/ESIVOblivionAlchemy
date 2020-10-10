@@ -1,47 +1,116 @@
+/* Section Formatting 
+_________________________*/
+
 body {
-  font-family: 'Oswald', sans-serif;
-  height: 95vh;
-  padding: none;
-  margin: none;
-
-}
-
-#alchemy {
-   background: 
+  margin: 0;
+  padding: 0;
+  background: 
     linear-gradient(
     rgba(255, 255, 255, 0.75),
     rgba(0, 0, 0, 0.75)
-  ),
+      ),
     url(/matt-briney-0tfz7ZoXaWc-unsplash.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    min-height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-size: 100%;
+  font-family: 'Oswald', sans-serif;
 }
 
-#headerNavSearchFilter {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  z-index: 5;
+#alchemy {
+  margin: 0;
+  padding: 0;
 }
 
-#siteTitle {
-  font-family: 'Josefin Slab', serif;
+/* Font Formatting 
+_________________________*/
+
+.siteTitle {
+  font-size: 1.2rem;
+  font-weight: 800;
 }
 
-.cardHeaderFont {
-  font-family: 'Noto Sans JP', sans-serif;
+.resultsListHeader{
+  font-size: 1.2rem;
+  font-weight: 800;
 }
 
-.effectHeader {
+.montserrat{
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+/* Color Formatting 
+_________________________*/
+
+.ebd5a7 {
   background-color: #ebd5a7;
 }
 
-.ingredientHeader {
+.c7a589 {
   background-color: #c7a589;
 }
 
 .zeroCount {
   background-color: #a0a0a1;;
+}
+
+/* Media Queries
+_________________________*/
+@media (min-width: 768px) {
+  #alchemy {
+    margin: 4rem 0 0 0;
+    padding: 0;
+  }
+
+  .navigationBar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 5;
+  }
+
+  .mainContent{
+    position: relative;
+  }
+
+  .createForms{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+
+  .resultsContainer {
+    position: fixed;
+    width: 100%;
+    height: calc(100vh - 65px);
+    top: 4rem;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .resultsList{
+    /* height:auto; */
+    overflow: auto;
+  }
+
+  .resultsListHeader{
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+}
+
+@media (min-width: 992px) {
+  .siteTitle {
+    font-size: 2rem;
+    font-weight: 500;
+  } 
+
+  .resultsListHeader{
+    font-size: 2rem;
+    font-weight: 500;
+  }
 }

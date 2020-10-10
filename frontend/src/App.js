@@ -1,55 +1,49 @@
-import './App.css';
 import React, { Component } from 'react';
+import SiteLayout from './components/SiteLayout';
 import { ingredientIndex } from './util';
 import { effectIndex } from './util';
-import Navbar from './components/Navbar';
-import SearchFilters from './components/SearchFilters';
-import IngredientList from './components/IngredientList';
-import EffectList from './components/EffectList';
-import IngredientCreate from './components/IngredientCreate';
-import EffectCreate from './components/EffectCreate';
 
 class App extends Component {
-
   state = {
     ingredients: [],
-    activeIngredientCount: 0,
-    activeEffectCount: 0,
     effects: [],
     effectCodex: {
       '00000000': {
+        ingredientCount: 0,
         name: '',
         relatedIngredients: {}
       }
     },
+    activeEffectCount: 0,
     showEffectList: true,
+    showEffectCreate: false,
+    activeIngredientCount: 0,
     showIngredientList: false,
-    searchText: '',
+    showIngredientCreate: false,
+    textSearch: '',
     selectedEffects: {
       filterEffect01: '',
       filterEffect02: '',
       filterEffect03: '',
       filterEffect04: '',
     },
-    showEffectCreate: false,
-    showIngredientCreate: false,
-    showFilters: true
+    showFilters: true,
   };
 
   componentDidMount() {
-    this.fetchData()
+    this.fetchData();
   };
 
   fetchData = () => {
     effectIndex()
       .then(effectsResults => {
-        console.log(effectsResults)
-        let effects = this.sortByName(effectsResults.effects)
+        console.log(effectsResults);
+        let effects = this.sortByName(effectsResults.effects);
         ingredientIndex()
           .then(ingredientsResults => {
-            console.log(ingredientsResults)
-            let ingredients = this.sortByName(ingredientsResults.ingredients)
-            this.updateEffectCodex(effectsResults.effects, ingredientsResults.ingredients)
+            console.log(ingredientsResults);
+            let ingredients = this.sortByName(ingredientsResults.ingredients);
+            this.updateEffectCodex(effects, ingredients)
             this.setState({
               ingredients: ingredients,
               effects: effects,
@@ -62,67 +56,60 @@ class App extends Component {
       })
   };
 
-  sortResultsByName = () => {
-    let ingredients = this.state.ingredients;
-    this.sortByName(ingredients)
-    let effects = this.state.effects;
-    this.sortByName(effects);
-    this.setState({
-      effects: effects,
-      ingredients: ingredients
-    })
-  }
-
-  sortByName = (itemList) => {
-    itemList.sort((a, b) => {
-      if (a.name.toLowerCase() <
-        b.name.toLowerCase()
-      ) {
-        return -1;
-      } else {
-        return 1;
-      }
-    })
-    return itemList
-  }
-
-  sortResultsByCount = () => {
-    let ingredients = this.state.ingredients;
-    this.sortIngredientsByCount(ingredients)
-    let effects = this.state.effects;
-    this.sortEffectsByCount(effects);
-    this.setState({
-      effects: effects,
-      ingredients: ingredients
-    })
-  }
-
-
-  sortIngredientsByCount = (ingredients) => {
-    ingredients.sort((a, b) => {
-      if (a.count > b.count
-      ) {
-        return -1;
-      } else {
-        return 1;
-      }
-    })
-    return ingredients
-  }
-
-  sortEffectsByCount = (effects) => {
+  // Database Functions
+  // __________________________________________________
+  addToEffects = (newEffect) => {
     let effectCodex = this.state.effectCodex;
-    effects.sort((a, b) => {
-      if (effectCodex[a._id].ingredientCount > effectCodex[b._id].ingredientCount
-      ) {
-        return -1;
-      } else {
-        return 1;
-      }
-    })
-    return effects
-  }
+    effectCodex[newEffect._id] = { name: newEffect.name, relatedIngredients: {} }
+    this.setState({
+      effects: [newEffect, ...this.state.effects],
+      effectCodex: effectCodex
+    });
+  };
 
+  updateEffects = (updatedEffect) => {
+    this.setState({
+      effects: this.state.effects.map(effect => (
+        effect._id === updatedEffect._id ? { ...effect, ...updatedEffect } : effect
+      ))
+    });
+    this.updateEffectCodex(this.state.effects, this.state.ingredients);
+  };
+
+  deleteFromEffects = (indexOfEffect) => {
+    let effects = this.state.effects;
+    effects.splice(indexOfEffect, 1);
+    this.setState({ effects: effects });
+    this.updateEffectCodex(this.state.effects, this.state.ingredients);
+
+  };
+
+  addToIngredients = (newIngredient) => {
+    this.setState({
+      ingredients: [newIngredient, ...this.state.ingredients]
+    });
+    this.updateEffectCodex(this.state.effects, this.state.ingredients);
+  };
+
+  updateIngredients = (updatedIngredient) => {
+    this.setState({
+      ingredients: this.state.ingredients.map(ingredient => (
+        ingredient._id === updatedIngredient._id ? { ...ingredient, ...updatedIngredient } : ingredient
+      ))
+    });
+    this.updateEffectCodex(this.state.effects, this.state.ingredients);
+  };
+
+  deleteFromIngredients = (indexOfIngredient) => {
+    let ingredients = this.state.ingredients;
+    ingredients.splice(indexOfIngredient, 1);
+    this.setState({ ingredients: ingredients })
+    // this.setState(state => ({ ingredients: this.state.ingredients.splice(indexOfIngredient, 1) }));
+    this.updateEffectCodex(this.state.effects, this.state.ingredients);
+  };
+
+  // Site Data Functions
+  // __________________________________________________
   updateEffectCodex = (effects, ingredients) => {
     let effectCodex = {};
     let activeEffectCount = 0;
@@ -135,6 +122,7 @@ class App extends Component {
         relatedIngredients: {}
       }
     })
+
     ingredients.forEach(ingredient => {
       if (ingredient.count > 0) { activeIngredientCount++ }
       if (effectCodex[ingredient.effect01]) {
@@ -174,76 +162,28 @@ class App extends Component {
       activeIngredientCount: activeIngredientCount,
       activeEffectCount: activeEffectCount
     })
-    console.log("effectCodex:")
-    console.log(effectCodex);
   }
 
-  addToIngredients = (newIngredient) => {
-    this.setState({
-      ingredients: [newIngredient, ...this.state.ingredients]
-    });
-    this.updateEffectCodex(this.state.effects, this.state.ingredients);
-  };
-
-  updateIngredients = (updatedIngredient) => {
-    this.setState({
-      ingredients: this.state.ingredients.map(ingredient => (
-        ingredient._id === updatedIngredient._id ? { ...ingredient, ...updatedIngredient } : ingredient
-      ))
-    });
-    this.updateEffectCodex(this.state.effects, this.state.ingredients);
-  };
-
-  deleteFromIngredients = (indexOfIngredient) => {
-    let ingredients = this.state.ingredients;
-    ingredients.splice(indexOfIngredient, 1);
-    this.setState({ ingredients: ingredients })
-    // this.setState(state => ({ ingredients: this.state.ingredients.splice(indexOfIngredient, 1) }));
-    this.updateEffectCodex(this.state.effects, this.state.ingredients);
-  };
-
-  addToEffects = (newEffect) => {
-    let effectCodex = this.state.effectCodex;
-    effectCodex[newEffect._id] = { name: newEffect.name, relatedIngredients: {} }
-    this.setState({
-      effects: [newEffect, ...this.state.effects],
-      effectCodex: effectCodex
-    });
-  };
-
-  updateEffects = (updatedEffect) => {
-    this.setState({
-      effects: this.state.effects.map(effect => (
-        effect._id === updatedEffect._id ? { ...effect, ...updatedEffect } : effect
-      ))
-    });
-    this.updateEffectCodex(this.state.effects, this.state.ingredients);
-  };
-
-  deleteFromEffects = (indexOfEffect) => {
-    let effects = this.state.effects;
-    effects.splice(indexOfEffect, 1);
-    this.setState({ effects: effects });
-    this.updateEffectCodex(this.state.effects, this.state.ingredients);
-
-  };
-
-  toggleIngredientList = () => {
-    this.setState(state => ({
-      showIngredientList: true,
-      showEffectList: false
-    }))
-  }
-
+  // Display Functions (Toggles)
+  // __________________________________________________
   toggleEffectList = () => {
-    this.setState(state => ({
+    this.setState({
       showIngredientList: false,
       showEffectList: true
-    }))
-  }
+    })
+  };
+
   toggleEffectCreate = () => {
     this.setState(state => ({ showEffectCreate: !state.showEffectCreate }))
   };
+
+  toggleIngredientList = () => {
+    this.setState({
+      showIngredientList: true,
+      showEffectList: false
+    })
+  };
+
   toggleIngredientCreate = () => {
     this.setState(state => ({ showIngredientCreate: !state.showIngredientCreate }))
   };
@@ -252,9 +192,72 @@ class App extends Component {
     this.setState(state => ({ showFilters: !state.showFilters }))
   };
 
-  handleSearchText = (event) => {
-    this.setState({ searchText: event.target.value })
+  // Search Filter Functions
+  // __________________________________________________
+  sortResultsByName = () => {
+    let ingredients = this.state.ingredients;
+    this.sortByName(ingredients);
+    let effects = this.state.effects;
+    this.sortByName(effects);
+    this.setState({
+      effects: effects,
+      ingredients: ingredients
+    });
+  };
+
+  sortByName = (itemList) => {
+    itemList.sort((a, b) => {
+      if (a.name.toLowerCase() <
+        b.name.toLowerCase()
+      ) {
+        return -1;
+      } else {
+        return 1;
+      }
+    })
+    return itemList;
+  };
+
+  sortResultsByCount = () => {
+    let ingredients = this.state.ingredients;
+    this.sortIngredientsByCount(ingredients);
+    let effects = this.state.effects;
+    this.sortEffectsByCount(effects);
+    this.setState({
+      effects: effects,
+      ingredients: ingredients
+    });
+  };
+
+  sortIngredientsByCount = (ingredients) => {
+    ingredients.sort((a, b) => {
+      if (a.count > b.count
+      ) {
+        return -1;
+      } else {
+        return 1;
+      }
+    })
+    return ingredients;
+  };
+
+  sortEffectsByCount = (effects) => {
+    let effectCodex = this.state.effectCodex;
+    effects.sort((a, b) => {
+      if (effectCodex[a._id].ingredientCount > effectCodex[b._id].ingredientCount
+      ) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+    return effects;
   }
+
+  handleTextSearch = (event) => {
+    this.setState({ textSearch: event.target.value })
+  };
+
   handleEffectSelect = (event) => {
     const selectedEffects = { ...this.state.selectedEffects }
     const inputName = event.target.name
@@ -275,104 +278,44 @@ class App extends Component {
     this.setState({ selectedEffects: selectedEffects })
   }
 
-
   render() {
 
     return (
-      <div className="container-fluid p-0 m-0" id="alchemy">
-        <header id="headerNavSearchFilter">
-          {/* Navigation Bar */}
-          <Navbar
-            toggleIngredientList={this.toggleIngredientList}
-            activeIngredientCount={this.state.activeIngredientCount}
-            toggleEffectList={this.toggleEffectList}
-            activeEffectCount={this.state.activeEffectCount}
-            showEffectCreate={this.state.showEffectCreate}
-            showFilters={this.state.showFilters}
-            toggleFilters={this.toggleFilters}
-            toggleEffectCreate={this.toggleEffectCreate}
-            toggleIngredientCreate={this.toggleIngredientCreate}
-          />
+      <SiteLayout
+        effects={this.state.effects}
+        activeEffectCount={this.state.activeEffectCount}
+        addToEffects={this.addToEffects}
+        updateEffects={this.updateEffects}
+        deleteFromEffects={this.deleteFromEffects}
+        showEffectList={this.state.showEffectList}
+        toggleEffectList={this.toggleEffectList}
+        showEffectCreate={this.state.showEffectCreate}
+        toggleEffectCreate={this.toggleEffectCreate}
 
-          {/* Create forms  */}
-          <div>
-            {/* Create Effect form  */}
-            {this.state.showEffectCreate
-              ? <EffectCreate
-                addToEffects={this.props.addToEffects}
-                toggleEffectCreate={this.toggleEffectCreate} />
-              : null
-            }
+        ingredients={this.state.ingredients}
+        activeIngredientCount={this.state.activeIngredientCount}
+        addToIngredients={this.addToIngredients}
+        updateIngredients={this.updateIngredients}
+        deleteFromIngredients={this.deleteFromIngredients}
+        showIngredientList={this.state.showIngredientList}
+        toggleIngredientList={this.toggleIngredientList}
+        showIngredientCreate={this.state.showIngredientCreate}
+        toggleIngredientCreate={this.toggleIngredientCreate}
 
-            {/* Create Ingredient form  */}
-            {this.state.showIngredientCreate
-              ? <IngredientCreate
-                effects={this.state.effects}
-                addToIngredients={this.props.addToIngredients}
-                toggleIngredientCreate={this.toggleIngredientCreate} />
-              : null
-            }
-          </div>
+        effectCodex={this.state.effectCodex}
+        updateEffectCodex={this.updateEffectCodex}
 
-          {/* Text Search and Effect Filters */}
-          {this.state.showFilters
-            ?
-            <div className="bg-light py-2 px-4">
-              <SearchFilters
-                effects={this.state.effects}
-                handleSearchText={this.handleSearchText}
-                handleChange={this.handleEffectSelect}
-                selectedEffects={this.state.selectedEffects}
-                sortResultsByName={this.sortResultsByName}
-                sortResultsByCount={this.sortResultsByCount}
-              />
-            </div>
-            : null
-          }
-        </header>
+        textSearch={this.state.textSearch}
+        handleTextSearch={this.handleTextSearch}
+        selectedEffects={this.state.selectedEffects}
+        handleEffectSelect={this.handleEffectSelect}
+        sortResultsByName={this.sortResultsByName}
+        sortResultsByCount={this.sortResultsByCount}
+        showFilters={this.state.showFilters}
+        toggleFilters={this.toggleFilters}
 
-        {/* Filtered Results */}
-        <section id="resultList" className="mt-5">
-          <div>
-            {/* Show List of Effects? */}
-            {this.state.showEffectList
-              ?
-              <EffectList
-                effects={this.state.effects}
-                effectCodex={this.state.effectCodex}
-                updateEffects={this.updateEffects}
-                deleteFromEffects={this.deleteFromEffects}
-                searchText={this.state.searchText}
-                updateIngredients={this.updateIngredients}
-              />
-              : null
-            }
-
-            {/* Show List of Ingredients? */}
-            {this.state.showIngredientList
-              ?
-              <IngredientList
-                ingredients={this.state.ingredients}
-                effects={this.state.effects}
-                effectCodex={this.state.effectCodex}
-                updateIngredients={this.updateIngredients}
-                deleteFromIngredients={this.deleteFromIngredients}
-                searchText={this.state.searchText}
-                selectedEffects={this.state.selectedEffects}
-              />
-              : null
-            }
-
-
-            {/* Photo credit */}
-            {/* <span className="text-light">Photo by <a href="https://unsplash.com/@mbriney?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Matt Briney</a> on <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span> */}
-
-          </div>
-        </section>
-
-      </div>
-
-    );
+      />
+    )
   }
 }
 
